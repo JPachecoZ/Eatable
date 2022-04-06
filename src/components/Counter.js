@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { StyledText } from "./Text";
 import { FaMinus } from 'react-icons/fa'
 import { FaPlus } from 'react-icons/fa'
 
@@ -14,16 +15,6 @@ const StyledCounter = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 1px;
-`
-
-const StyledText = styled.p`
-  padding: 0px;
-  margin: 0px;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 18px;
-  line-height: 23px;
-  font-weight: 600;
-  color: #ffffff;
 `
 
 const StyledIcon = styled.div`
