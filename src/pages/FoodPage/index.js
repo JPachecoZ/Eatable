@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
-import Button from "../components/button";
-import { Heading } from "../components/text";
-import { colors } from "../styles";
+import Button from "../../components/Button";
+import Text from "../../components/Text"
 
 const Wrapper = styled.div`
   padding: 3.31rem 2.56rem;
@@ -9,19 +8,6 @@ const Wrapper = styled.div`
   height: 100vh;
 `;
 
-const ContentInput = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  .content__search {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .custtom__icon {
-    color: ${colors.gray.dark}
-  }
-`
 const FoodCard = styled.div`
   display:flex;
   gap: 5.68rem;
@@ -43,20 +29,16 @@ const CustomImg = styled.div`
 const NameProduct = styled.div`
   display:flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.625rem;
   align-items: center;
   justify-content: space-around;
+  padding-bottom: 1.68rem;
 
 `
 
 function FoodPage(){
   return (
     <Wrapper>
-      {/* <ContentInput>
-        <div className="content__search">
-          
-        </div>
-      </ContentInput> */}
       <FoodCard>
         <CustomImg>
           <img 
@@ -68,11 +50,11 @@ function FoodPage(){
         
         <div >
           <NameProduct>
-            <Heading size="lg">Green cream</Heading>
-            <Heading size="lg">$ 33.13</Heading>
+            <Text size="xl" bold>Green cream</Text>
+            <Text size="xl" bold color="#FA4A0C">$ 33.13</Text>
           </NameProduct>
-          <p>Description</p>
-          <p>Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.</p>
+          <Text size="m" bold>Description</Text>
+          <Text size="s">Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.</Text>
         </div>
         <Button fullWidth>Add to Cart</Button>
       </FoodCard>

@@ -4,7 +4,7 @@ import UnauthenticatedApp from "./UnauthenticatedApp";
 import LoadingPage from "../pages/LoadingPage";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("null");
   const [isLoading, setIsLoading] = useState(false);
 
   if (isLoading) {

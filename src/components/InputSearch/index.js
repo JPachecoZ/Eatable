@@ -1,16 +1,13 @@
 import styled from "@emotion/styled";
-import { colors, typography } from "../styles";
-import {Text} from "./text";
 
-const Label = Text.withComponent("label");
+// const Label = Text.withComponent("label");
 
 const StyledInput = styled.input`
   padding: 0.5rem;
-  ${typography.text.m};
   border-radius: 1rem;
   border: none;
   background-color: white;
-  color: ${colors.gray.dark};
+  color: var(--gray-200);
 `;
 
 const InputContainer = styled.div`
@@ -19,12 +16,12 @@ const InputContainer = styled.div`
   gap: 0.25rem;
 `;
 
-const Error = styled(Text)`
-  color: red;
-  padding-left: 1rem;
-`;
+// const Error = styled(Text)`
+//   color: red;
+//   padding-left: 1rem;
+// `;
 
-function Input({
+function InputSearch({
   id,
   name,
   type = "text",
@@ -37,7 +34,7 @@ function Input({
 
   return (
     <InputContainer>
-      {label && <Label htmlFor={id}>{label}</Label>}
+      {/* {label && <Label htmlFor={id}>{label}</Label>} */}
       <StyledInput
         id={id}
         name={name}
@@ -45,9 +42,9 @@ function Input({
         placeholder={placeholder}
         {...rest}
       />
-      {error && <Error size="sm">{error}</Error>}
+      {/* {error && <Error size="sm">{error}</Error>} */}
     </InputContainer>
   );
 }
 
-export default Input;
+export default InputSearch;
