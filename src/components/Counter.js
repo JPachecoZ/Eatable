@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { StyledText } from "./Text";
+import Text from "./Text";
 import { FaMinus } from 'react-icons/fa'
 import { FaPlus } from 'react-icons/fa'
 
@@ -29,7 +29,7 @@ export default function Counter(){
   return (
     <StyledCounter>
       <StyledIcon><FaMinus/></StyledIcon>
-      <StyledText>1</StyledText>
+      <Text bold size="m">1</Text>
       <StyledIcon><FaPlus/></StyledIcon>
     </StyledCounter>
   )

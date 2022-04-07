@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { StyledText } from "./Text";
+import Text from "./Text";
 import Counter from "./Counter";
 
 const StyledCardItem = styled.div`
@@ -26,25 +26,13 @@ const StyledContainer = styled.div`
   flex-direction: column;
   gap: 8px;
 `
-
-// const StyledPrice = styled.p`
-//   padding: 0px;
-//   padding-top: 8px;
-//   margin: 0px;
-//   font-family: 'Source Sans Pro', sans-serif;
-//   font-size: 18px;
-//   line-height: 23px;
-//   font-weight: 600;
-//   color: #fa4a0c;
-// `
-
 export default function CardItem(){
   return (
     <StyledCardItem>
       <StyledImage src="https://www.thespruceeats.com/thmb/c57iCi93U2l6xHJ1Af4kz6OLo38=/3661x3661/smart/filters:no_upscale()/hawaiian-pizza-4691857-hero-01-1a8f6764c70e4113bbf31bd1a73aca2e.jpg"/>
       <StyledContainer>
-        <StyledText size="16px">Veggie tomato mix</StyledText>
-        <StyledText color="#fa4a0c">$15.45</StyledText>
+        <Text bold >Veggie tomato mix</Text>
+        <Text bold size="m" color="var(--accent-color)">$15.45</Text>
       </StyledContainer>
       <Counter/>
     </StyledCardItem>

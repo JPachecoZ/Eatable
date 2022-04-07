@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { StyledText } from "./Text";
+import Text from "./Text";
 
 export default function TotalCart(){
 
@@ -10,8 +10,8 @@ export default function TotalCart(){
 
   return (
     <TotalContainer>
-      <StyledText weight="400">Total</StyledText>
-      <StyledText size="28px">$97.90</StyledText>
+      <Text size="m">Total</Text>
+      <Text size="xl">$97.90</Text>
     </TotalContainer>
   )
 }
