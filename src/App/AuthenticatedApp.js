@@ -1,7 +1,10 @@
+import CartPage from "../pages/CartPage";
+import CheckoutPage from "../pages/CheckoutPage";
+
 function AuthenticatedApp() {
   return (
-    <div className="App">
-      <h1>Hello</h1>
+    <div>
+      <CartPage/>
     </div>
   );
 }
