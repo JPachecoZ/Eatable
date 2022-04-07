@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Text from "./Text";
+import Text from "../Text";
 import { FaMinus } from 'react-icons/fa'
 import { FaPlus } from 'react-icons/fa'
 

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import Text from "./Text";
-import Counter from "./Counter";
+import Text from "../Text";
+import Counter from "../Counter";
 
 const StyledCardItem = styled.div`
   background-color: #FFFFFF;
