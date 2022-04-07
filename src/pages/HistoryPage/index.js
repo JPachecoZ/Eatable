@@ -56,8 +56,70 @@ justify-content: space-between;
 width: 100%;
 `
 
-
 export default function HistoryPage(){
+
+  const DATA = [
+    {
+      "id": 1,
+      "items_count": 3,
+      "total": 18812,
+      "delivery_address": "Lima-Peru",
+      "created_at": "2022-04-06T05:58:10.221Z",
+      "order_details": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "subtotal": 3313,
+          "product_id": 1,
+          "product_name": "green cream"
+        },
+        {
+          "id": 2,
+          "quantity": 1,
+          "subtotal": 4039,
+          "product_id": 4,
+          "product_name": "zucchini cream"
+        },
+        {
+          "id": 3,
+          "quantity": 5,
+          "subtotal": 11460,
+          "product_id": 10,
+          "product_name": "nachos chips"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "items_count": 2,
+      "total": 11625,
+      "delivery_address": "Lima-Peru",
+      "created_at": "2022-04-06T19:22:41.964Z",
+      "order_details": [
+        {
+          "id": 7,
+          "quantity": 1,
+          "subtotal": 2816,
+          "product_id": 1,
+          "product_name": "green cream"
+        },
+        {
+          "id": 8,
+          "quantity": 1,
+          "subtotal": 8809,
+          "product_id": 4,
+          "product_name": "zucchini cream"
+        }
+      ]
+    }
+  ]
+
+  function getDate(date) {
+    let newDate = new Date(date);
+    newDate = newDate.toDateString().split(" ")
+    return newDate[0] + ", " + newDate[1] + " " + newDate[2] + ", " + newDate[3];
+    ;
+  }
 
   const active = true;
 
@@ -69,44 +131,39 @@ export default function HistoryPage(){
         <Text bold size="l">History</Text>
         <div></div>
       </Title>
-      <DataDetails>
-        <Text size="m">Wed, Mar 20, 2021</Text>
-        <TotalContainer>
-          <Text size="s">3 items</Text>
-          <Text color="var(--accent-color)" size="s">$64.90</Text>
-        </TotalContainer>
-        <TotalContainer>
-          <div></div>
-          <IoIosArrowDown/>
-        </TotalContainer>
-      </DataDetails>
 
-      <DataDetails>
-        <Text size="m">Wed, Mar 20, 2021</Text>
+      {DATA.map((order) => {
+        return (
+        <DataDetails>
+        <Text size="m">{getDate(order.created_at)}</Text>
         <TotalContainer>
-          <Text size="s">2 items</Text>
-          <Text color="var(--accent-color)" size="s">$97.90</Text>
+          <Text size="s">{order.items_count} items</Text>
+          <Text color="var(--accent-color)" size="s">$ {order.total/100}</Text>
         </TotalContainer>
+        {!active ? "": <>
+          <Text bold size="m">Order</Text>
 
-        <Text bold size="m">Order</Text>
-        <TotalContainer>
-          <Text size="s">5 - Veggie tomato mix</Text>
-          <Text size="s">$75.45</Text>
-        </TotalContainer>
-        <TotalContainer>
-          <Text size="s">1 - Fishwith mix orange...</Text>
-          <Text size="s">$12.45</Text>
-        </TotalContainer>
-        <LineDiv/>
-
-        <Text bold size="m">Delivery</Text>
-        <Text size="s">Calle Rosales 123, urb El Jardin</Text>
-
+          {order.order_details.map((detail) => {
+            return (
+          <TotalContainer>
+            <Text size="s">{detail.quantity} - {detail.product_name}</Text>
+            <Text size="s">$ {detail.subtotal/100}</Text>
+          </TotalContainer>
+          )})}
+          <LineDiv/>
+          <Text bold size="m">Delivery</Text>
+          <Text size="s">{order.delivery_address}</Text>
+          
+          </>
+        }
         <TotalContainer>
           <div></div>
           {active ? <IoIosArrowUp/> : <IoIosArrowDown/>}
         </TotalContainer>
-      </DataDetails>
+        </DataDetails>
+        )
+      })}
+      
       </div>
     </Container>
   )
