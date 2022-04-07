@@ -1,7 +1,12 @@
+import SearchPage from "./pages/search-page";
+import FoodPage from "./pages/food-page";
+
+
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <SearchPage/>
+      {/* <FoodPage/> */}
     </div>
   );
 }
