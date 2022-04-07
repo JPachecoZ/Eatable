@@ -6,8 +6,8 @@ const StyledInput = styled.input`
   padding: 0.5rem;
   border-radius: 1rem;
   border: none;
-  background-color: white;
-  color: var(--gray-200);
+  background-color: var(--bg-2);
+  color: #333333;
 `;
 
 const InputContainer = styled.div`

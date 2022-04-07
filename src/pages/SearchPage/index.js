@@ -31,7 +31,9 @@ const ContentInput = styled.div`
   }
 `
 const ContentCard = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 2fr));
+  justify-items: center;
   gap: 1.25rem;
 `
 const FoodCard = styled.div`
@@ -92,13 +94,30 @@ const type = [
   {category: "Indian"},
 ]
 
-function SearchPage(){
+function SearchPage({products, onhandleChange}){
+
+  // function handleSubmit(event){
+  //   event.preventDefault();
+  //   const { query } = event.target.elements;
+  //   // onFormSubmit()
+  //   // const name = products.filter((item)=>{return item.name === query})
+  //   // console.log(name)
+  //   onFormSubmit(query.value);
+  // }
+
   return (
     <Wrapper>
       <ContentInput>
         <div className="content__search">
           <BiSearch className="custtom__icon--size"/>
-          <InputSearch placeholder="Search"/>
+          {/* <form > */}
+            <InputSearch 
+              id="query"
+              name="query"
+              placeholder="Search"
+              onChange={({target}) => onhandleChange(target.value) }
+            />
+          {/* </form> */}
         </div>
         <BiCart className="custtom__icon"/>
       </ContentInput>
@@ -108,106 +127,22 @@ function SearchPage(){
         )}
       </Category>
       <ContentCard>
+        {products ? products.map((products) => 
         <FoodCard>
           <CustomImg>
             <img 
-              src="https://img.freepik.com/free-photo/top-view-green-cream-soups_23-2148519096.jpg" 
-              alt="img-food"
-              className="img"
-              />
+            src={products.picture_url} 
+            alt="img-food"
+            className="img"
+            />
           </CustomImg>
-          
           <Description >
             <div className="description__product">
-              <Text size="l" bold>Pasta Dish</Text>
-              <Text size="l" bold color="#FA4A0C">$ 33.13</Text>
+              <Text size="l" bold>{products.name}</Text>
+              <Text size="l" bold color="#FA4A0C">{`$ ${Math.round((products.price * 0.01) * 100)/100}`}</Text>
             </div>
           </Description>
-        </FoodCard>
-        <FoodCard>
-          <CustomImg>
-            <img 
-              src="https://img.freepik.com/free-photo/top-view-green-cream-soups_23-2148519096.jpg" 
-              alt="img-food"
-              className="img"
-              />
-          </CustomImg>
-          
-          <Description >
-            <div className="description__product">
-              <Text size="l" bold>Pasta Dish</Text>
-              <Text size="l" bold color="#FA4A0C">$ 33.13</Text>
-            </div>
-          </Description>
-        </FoodCard>
-      </ContentCard>
-      <ContentCard>
-        <FoodCard>
-          <CustomImg>
-            <img 
-              src="https://img.freepik.com/free-photo/top-view-green-cream-soups_23-2148519096.jpg" 
-              alt="img-food"
-              className="img"
-              />
-          </CustomImg>
-          
-          <Description >
-            <div className="description__product">
-              <Text size="l" bold>Pasta Dish</Text>
-              <Text size="l" bold color="#FA4A0C">$ 33.13</Text>
-            </div>
-          </Description>
-        </FoodCard>
-        <FoodCard>
-          <CustomImg>
-            <img 
-              src="https://img.freepik.com/free-photo/top-view-green-cream-soups_23-2148519096.jpg" 
-              alt="img-food"
-              className="img"
-              />
-          </CustomImg>
-          
-          <Description >
-            <div className="description__product">
-              <Text size="l" bold>Pasta Dish</Text>
-              <Text size="l" bold color="#FA4A0C">$ 33.13</Text>
-            </div>
-          </Description>
-        </FoodCard>
-      </ContentCard>
-      <ContentCard>
-        <FoodCard>
-          <CustomImg>
-            <img 
-              src="https://img.freepik.com/free-photo/top-view-green-cream-soups_23-2148519096.jpg" 
-              alt="img-food"
-              className="img"
-              />
-          </CustomImg>
-          
-          <Description >
-            <div className="description__product">
-              <Text size="l" bold>Pasta Dish</Text>
-              <Text size="l" bold color="#FA4A0C">$ 33.13</Text>
-            </div>
-          </Description>
-        </FoodCard>
-        <FoodCard>
-          <CustomImg>
-            <img 
-              src="https://img.freepik.com/free-photo/top-view-green-cream-soups_23-2148519096.jpg" 
-              alt="img-food"
-              className="img"
-              />
-          </CustomImg>
-          
-          <Description >
-            <div className="description__product">
-              <Text size="l" bold>Pasta Dish</Text>
-              <Text size="l" bold color="#FA4A0C">$ 33.13</Text>
-            </div>
-          </Description>
-        </FoodCard>
+        </FoodCard>) : "No hay data"}
       </ContentCard>
     </Wrapper>
     
