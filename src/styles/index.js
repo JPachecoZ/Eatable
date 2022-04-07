@@ -1,5 +1,9 @@
-import { colors } from "./colors";
-import { reset, global } from "./global";
-import { fonts, typography } from "./typography";
+/** @jsxImportSource @emotion/react */
+import { Global } from "@emotion/react";
+import { globalStyles } from "./global";
 
-export { colors, reset, fonts, typography, global };
+function Styles() {
+  return <Global styles={globalStyles} />;
+}
+
+export { Styles };
