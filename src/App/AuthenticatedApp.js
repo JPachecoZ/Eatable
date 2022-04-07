@@ -1,4 +1,4 @@
-function App() {
+function AuthenticatedApp() {
   return (
     <div className="App">
       <h1>Hello</h1>
@@ -6,4 +6,4 @@ function App() {
   );
 }
 
-export default App;
+export default AuthenticatedApp;
