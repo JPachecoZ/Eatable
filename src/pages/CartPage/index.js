@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import CardItem from "../../components/CardItem";
 import TotalCart from "../../components/TotalCart";
 import Text from "../../components/Text";
+import Button from "../../components/Button";
 
 const Container = styled.section`
   max-width: 415px;
@@ -38,6 +39,7 @@ export default function CartPage(){
         <CardItem/>
       </CardList>
       <TotalCart/>
+      <Button fullWidth>Checkout</Button>
     </Container>
   )
 }
