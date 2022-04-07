@@ -1,4 +1,6 @@
 import SearchPage from "../pages/SearchPage";
+import CartPage from "../pages/CartPage";
+import HistoryPage from "../pages/HistoryPage";
 import {HiHome} from "react-icons/hi"
 import {FiUser} from "react-icons/fi"
 import {GiBackwardTime} from "react-icons/gi"
@@ -35,7 +37,8 @@ function AuthenticatedApp() {
         <Route index element={<Navigate to="/home" />} />
         <Route path="/home" element={<SearchPage/>} />
         <Route path="/profile" element={<div>Profile</div>} />
-        <Route path="/orders" element={<div>Orders-Card</div>} />
+        <Route path="/orders" element={<HistoryPage/>}/>
+        <Route path="/cart" element={<CartPage/>}/>
       </Routes>
       <Navbar>
         <NavLink to="home"  style={activeStyle}>

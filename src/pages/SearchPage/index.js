@@ -3,6 +3,7 @@ import {BiCart} from "react-icons/bi"
 import styled from "@emotion/styled";
 import Text from "../../components/Text";
 import InputSearch from "../../components/InputSearch";
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   padding: 3.31rem 2.56rem;
@@ -100,7 +101,7 @@ function SearchPage(){
           <BiSearch className="custtom__icon--size"/>
           <InputSearch placeholder="Search"/>
         </div>
-        <BiCart className="custtom__icon"/>
+        <Link to="/cart"><BiCart className="custtom__icon"/></Link>
       </ContentInput>
       <Category>
         {type.map((item)=>
