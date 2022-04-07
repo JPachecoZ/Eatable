@@ -55,7 +55,7 @@ export default function CartPage(){
         <CardItem/>
       </CardList>
       <Footer>
-        <TotalCart/>
+        <TotalCart total="$97.90"/>
         <Button fullWidth>Checkout</Button>
       </Footer>
     </Container>

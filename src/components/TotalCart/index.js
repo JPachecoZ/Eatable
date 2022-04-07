@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Text from "../Text";
 
-export default function TotalCart(){
+export default function TotalCart(props){
 
   const TotalContainer = styled.div`
     display: flex;
@@ -12,7 +12,7 @@ export default function TotalCart(){
   return (
     <TotalContainer>
       <Text size="m">Total</Text>
-      <Text bold size="xl">$97.90</Text>
+      <Text bold size="xl">{props.total}</Text>
     </TotalContainer>
   )
 }
