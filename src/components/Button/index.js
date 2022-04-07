@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 
 const StyledButton = styled.button`
-  padding: 23.5px;
+  padding: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,9 +11,9 @@ const StyledButton = styled.button`
   font-weight: 600;
   color: var(--bg-2);
   border: none;
-  font-size: 18px;
+  font-size: 1.125rem;
   cursor: pointer;
-  border-radius: 30px;
+  border-radius: 1.875rem;
   width: ${(props) => (props.fullWidth ? "100%" : "fit-content")};
 `;
 

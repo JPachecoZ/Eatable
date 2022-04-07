@@ -4,22 +4,22 @@ import { FaMinus } from 'react-icons/fa'
 import { FaPlus } from 'react-icons/fa'
 
 const StyledCounter = styled.div`
-  background-color: #FA4A0C;
-  border-radius: 30px;
-  height: 20px;
-  width: 52px;
+  background-color: var(--accent-color);
+  border-radius: 1.875rem;
+  height: 1.25rem;
+  width: 3.25rem;
   align-self: flex-end;
-  color: #FFFFFF;
+  color: var(--bg-2);
   display: flex;
-  gap: 6px;
+  gap: 0.375rem;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1px;
+  margin-bottom: 0.05rem;
 `
 
 const StyledIcon = styled.div`
-  height: 12px;
-  width: 12px;
+  height: 0.75rem;
+  width: 0.75rem;
   display:flex;
   align-items:center;
   justify-content: center;

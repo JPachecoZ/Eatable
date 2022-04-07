@@ -10,7 +10,7 @@ function InputField({ id, type, label, fieldProps, touched, errors }) {
     padding-bottom: 0.3125rem;
     margin-block: 0.3125rem;
     border: none;
-    border-bottom: 1px solid var(--gray-300);
+    border-bottom: 0.0625rem solid var(--gray-300);
   `;
 
   const labelPrompt =

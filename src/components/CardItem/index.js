@@ -4,27 +4,27 @@ import Counter from "../Counter";
 
 const StyledCardItem = styled.div`
   background-color: #FFFFFF;
-  height: 82px;
-  border-radius: 20px;
-  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.03);
+  height: 5.125rem;
+  border-radius: 1.25rem;
+  box-shadow: 0rem 0.625rem 2.5rem rgba(0, 0, 0, 0.03);
   display: flex;
   align-items: center;
-  padding: 20px;
-  gap:20px;
-  max-width: 315px;
+  padding: 1.25rem;
+  gap:1.25rem;
+  max-width: 19.7rem;
 `
 
 const StyledImage = styled.img`
-  height: 62px;
-  width: 62px;
+  height: 3.875rem;
+  width: 3.875rem;
   border-radius: 100%;
   object-fit: scale-down;
-  box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0rem 1.25rem 1.25rem rgba(0, 0, 0, 0.2);
 `
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 `
 export default function CardItem(){
   return (

@@ -40,8 +40,6 @@ const Title = styled.div`
   width: 100%;
 `
 
-
-
 export default function CartPage(){
   return(
     <Container>

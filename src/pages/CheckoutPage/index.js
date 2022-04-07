@@ -5,15 +5,15 @@ import Button from "../../components/Button";
 import { IoIosArrowBack } from 'react-icons/io'
 
 const Container = styled.section`
-  max-width: 415px;
+  max-width: 25.94rem;
   margin: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
   height: 100vh;
-  padding: 50px;
-  gap: 20px;
+  padding: 3.125rem;
+  gap: 1.25rem;
 `
 
 const Footer = styled.div`
@@ -25,7 +25,7 @@ const Footer = styled.div`
 
 const Title = styled.div`
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   display:flex;
   align-items: center;
   justify-content: space-between;
@@ -34,8 +34,8 @@ const Title = styled.div`
 
 const DetailsHeading = styled.div`
   display:flex;
-  margin-top: 30px;
-  margin-bottom: 20px;
+  margin-top: 1.875rem;
+  margin-bottom: 1.25rem;
   justify-content: space-between;
   width: 100%;
 `
@@ -43,15 +43,15 @@ const DetailsHeading = styled.div`
 const DataDetails = styled.div`
   background-color: var(--bg-2);
   box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.03);
-  border-radius: 20px;
-  padding: 25px 52px 20px 30px;
+  border-radius: 1.25rem;
+  padding: 1.5625rem 3.25rem 1.25rem 1.875rem;
   display: flex;
   flex-direction: column;
-  gap:10px;
+  gap:0.625rem;
 `
 
 const LineDiv = styled.div`
-  height: 0.5px;
+  height: 0.03rem;
   opacity: 30%;
   background-color: #000000;
   width: 100%;

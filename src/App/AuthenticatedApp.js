@@ -4,7 +4,7 @@ import CheckoutPage from "../pages/CheckoutPage";
 function AuthenticatedApp() {
   return (
     <div>
-      <CheckoutPage/>
+      <CartPage/>
     </div>
   );
 }
