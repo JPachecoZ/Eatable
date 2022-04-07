@@ -1,24 +1,20 @@
-import { useState } from "react";
-import AuthenticatedApp from "./AuthenticatedApp";
+import { lazy, Suspense } from "react";
 import UnauthenticatedApp from "./UnauthenticatedApp";
 import LoadingPage from "../pages/LoadingPage";
+import { useAuth } from "../context/auth-context";
+
+const AuthenticatedApp = lazy(() => import("./AuthenticatedApp"));
 
 function App() {
-  const [user, setUser] = useState("null");
-  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuth();
 
-
-  return (<>
-    <AuthenticatedApp/>
-  </>);
-  // const [user, setUser] = useState(null);
-  // const [isLoading, setIsLoading] = useState(false);
-
-  // if (isLoading) {
-  //   return <LoadingPage />;
-  // } else {
-  //   return user ? <AuthenticatedApp /> : <UnauthenticatedApp />;
-  // }
+  return user ? (
+    <Suspense fallback={<LoadingPage />}>
+      <AuthenticatedApp />
+    </Suspense>
+  ) : (
+    <UnauthenticatedApp />
+  );
 }
 
 export default App;

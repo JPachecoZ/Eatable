@@ -1,7 +1,7 @@
 import SearchPage from "../pages/SearchPage";
-import {HiHome} from "react-icons/hi"
-import {FiUser} from "react-icons/fi"
-import {GiBackwardTime} from "react-icons/gi"
+import { HiHome } from "react-icons/hi";
+import { FiUser } from "react-icons/fi";
+import { GiBackwardTime } from "react-icons/gi";
 import styled from "@emotion/styled";
 import { Navigate, NavLink, Route, Routes } from "react-router-dom";
 
@@ -23,22 +23,27 @@ const Navbar = styled.div`
 `;
 
 const activeStyle = ({ isActive }) =>
-  isActive ? { color: "#FA4A0C", filter: "drop-shadow(0px 6px 20px rgba(215, 56, 0, 0.4))" } : undefined;
-
+  isActive
+    ? {
+        color: "#FA4A0C",
+        filter: "drop-shadow(0px 6px 20px rgba(215, 56, 0, 0.4))",
+      }
+    : undefined;
 
 function AuthenticatedApp() {
   return (
-    <div className="App">
+    <div>
       {/* <SearchPage/> */}
       {/* <FoodPage/> */}
       <Routes>
         <Route index element={<Navigate to="/home" />} />
-        <Route path="/home" element={<SearchPage/>} />
+        <Route path="*" element={<Navigate to="/home" />} />
+        <Route path="/home" element={<SearchPage />} />
         <Route path="/profile" element={<div>Profile</div>} />
         <Route path="/orders" element={<div>Orders-Card</div>} />
       </Routes>
       <Navbar>
-        <NavLink to="home"  style={activeStyle}>
+        <NavLink to="home" style={activeStyle}>
           <HiHome />
         </NavLink>
         <NavLink to="profile" style={activeStyle}>
