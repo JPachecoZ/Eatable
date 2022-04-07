@@ -1,9 +1,10 @@
 import CartPage from "../pages/CartPage";
+import CheckoutPage from "../pages/CheckoutPage";
 
 function AuthenticatedApp() {
   return (
     <div>
-      <CartPage/>
+      <CheckoutPage/>
     </div>
   );
 }

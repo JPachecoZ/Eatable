@@ -12,7 +12,7 @@ export default function TotalCart(){
   return (
     <TotalContainer>
       <Text size="m">Total</Text>
-      <Text size="xl">$97.90</Text>
+      <Text bold size="xl">$97.90</Text>
     </TotalContainer>
   )
 }

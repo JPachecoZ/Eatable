@@ -42,21 +42,17 @@ const Title = styled.div`
 
 
 
-export default function CartPage(){
+export default function CheckoutPage(){
   return(
     <Container>
-      <CardList>
-        <Title>
-          <IoIosArrowBack/>
-          <Text bold size="l">Cart</Text>
-          <div></div>
-        </Title>
-        <CardItem/>
-        <CardItem/>
-      </CardList>
+      <Title>
+        <IoIosArrowBack/>
+        <Text bold size="l">Checkout</Text>
+        <div></div>
+      </Title>
       <Footer>
         <TotalCart/>
-        <Button fullWidth>Checkout</Button>
+        <Button fullWidth>Complete Order</Button>
       </Footer>
     </Container>
   )
