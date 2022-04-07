@@ -1,7 +1,7 @@
 import CardItem from "./components/CardItem";
 import Total from "./components/TotalCart";
 
-function App() {
+function AuthenticatedApp() {
   return (
     <div className="App">
       <CardItem></CardItem>
@@ -10,4 +10,4 @@ function App() {
   );
 }
 
-export default App;
+export default AuthenticatedApp;
