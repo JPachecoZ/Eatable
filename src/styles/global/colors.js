@@ -8,6 +8,8 @@ export const colors = css`
     --gray-100: #f6f6f9;
     --gray-200: #b8b8bb;
     --gray-300: #333333;
+    --gray-400: #9A9A9D;
+    --gray-500: #ADADAF;
     --accent-color: #fa4a0c;
     --bg-1: var(--gray-100);
     --bg-2: white;

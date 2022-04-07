@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-
+import Text from "../Text"
 
 const StyledButton = styled.button`
-  padding: 1.5rem;
+  padding: 0.5rem 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,9 +11,8 @@ const StyledButton = styled.button`
   font-weight: 600;
   color: var(--bg-2);
   border: none;
-  font-size: 1.125rem;
   cursor: pointer;
-  border-radius: 1.875rem;
+  border-radius: 1rem;
   width: ${(props) => (props.fullWidth ? "100%" : "fit-content")};
 `;
 
@@ -21,7 +20,7 @@ function Button(props) {
   return (
     <StyledButton {...props}>
       {props.Icon && <props.Icon />}
-      {props.children}
+      <Text size="m" bold>{props.children}</Text>
     </StyledButton>
   );
 }
