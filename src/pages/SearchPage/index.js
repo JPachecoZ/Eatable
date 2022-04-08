@@ -5,7 +5,7 @@ import Text from "../../components/Text";
 import InputSearch from "../../components/InputSearch";
 
 const Wrapper = styled.div`
-  padding: 3.31rem 2.56rem;
+  padding: 3rem 2.5rem;
   margin: 0 auto;
   min-height: 100vh;
 `;
@@ -76,7 +76,7 @@ const Description = styled.div`
     padding: 0px;
   }
 `;
-const Category = styled.p`
+const Category = styled.div`
   display: flex;
   gap: 2.12rem;
   flex-wrap: wrap;
