@@ -29,47 +29,12 @@ const activeStyle = ({ isActive }) =>
 
 
 function AuthenticatedApp() {
-  const  [products, setProducts] = useState(""); // data estatica
-  const [query, setQuery] = useState(""); // busqueda de nombre
-  const [search, setSearch] = useState(""); // data dinámica
-  console.log(query)
-
-  useEffect(() => {
-    getProducts()
-    .then(response => {
-      setProducts(response);
-      setSearch(response)})
-      .catch((error) => console.log(error));
-  }, []);
-
-  console.log(products)
-  console.log(search)
-
-  function handleChange(value){
-    setQuery(value);
-    filtrar(value)
-  }
-
-  // const filtrar=(busquedaitem)=>{
-  //   var results = search.filter((elemento)=>{
-  //     console.log(results)
-  //     return elemento.name === busquedaitem;
-  //   })
-  //   setProducts(results)
-  // }
-
-  const filtrar=(value)=>{
-    var results = search.filter((item)=>{
-      return item.name.includes(value);
-    })
-    setProducts(results)
-  }
-
+  
   return (
     <div className="App">
       <Routes>
         <Route index element={<Navigate to="/home" />} />
-        <Route path="/home" element={<SearchPage products={products} onhandleChange={handleChange} filter={filtrar}/>} />
+        <Route path="/home" element={<SearchPage/>} />
         <Route path="/profile" element={<div>Profile</div>} />
         <Route path="/orders" element={<div>Orders-Card</div>} />
       </Routes>

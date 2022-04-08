@@ -1,8 +1,12 @@
 import {BiSearch} from "react-icons/bi"
 import {BiCart} from "react-icons/bi"
 import styled from "@emotion/styled";
-import Text from "../../components/Text";
 import InputSearch from "../../components/InputSearch";
+import capitalize from "./utils";
+import { useEffect, useState } from "react";
+import { getProducts } from "../../services/products-service";
+import FoodCards from "../../components/FoodCard";
+import { useSearchParams } from "react-router-dom";
 
 const Wrapper = styled.div`
   padding: 3.31rem 2.56rem;
@@ -29,55 +33,15 @@ const ContentInput = styled.div`
     width: 24px;
     height: 24px;
   }
-`
+`;
+
 const ContentCard = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 2fr));
   justify-items: center;
   gap: 1.25rem;
-`
-const FoodCard = styled.div`
-  position: relative;
-  width: 156px;
-  height: 250px;
-`
+`;
 
-const CustomImg = styled.div`
-  .img {
-    width: 130px;
-    height: 130px;
-    border-radius: 100%;
-    box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    position: absolute;
-    left: 8.33%;
-    right: 8.33%;   
-  }
-`
-
-const Description = styled.div`
-  position: absolute;
-  width: 156px;
-  height: 212px;
-  top: 15.2%;
-  background: #FFFFFF;
-  box-shadow: 0px 30px 60px rgba(57, 57, 57, 0.1);
-  border-radius: 30px;
-  text-align: center;
-  padding: 0.75rem;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-
-  .description__product {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0px;
-  }
-`
 const Category = styled.p`
   display: flex;
   gap: 2.12rem;
@@ -86,24 +50,49 @@ const Category = styled.p`
   color: var(--gray-400);
   padding-bottom: 2.18rem;
   width: 100%;
-`
-const type = [ 
-  {category: "Italian"},
-  {category: "Mexican"},
-  {category: "Snacks"},
-  {category: "Indian"},
-]
+`;
 
-function SearchPage({products, onhandleChange}){
+function SearchPage(){
 
-  // function handleSubmit(event){
-  //   event.preventDefault();
-  //   const { query } = event.target.elements;
-  //   // onFormSubmit()
-  //   // const name = products.filter((item)=>{return item.name === query})
-  //   // console.log(name)
-  //   onFormSubmit(query.value);
+  const [products, setProducts] = useState([]); // data estatica
+  const [search, setSearch] = useState([]); // data dinámica
+  const [searchParams, setSearchParams] = useSearchParams();
+  console.log(searchParams)
+
+  useEffect(() => {
+    getProducts()
+    .then(response => {
+      setProducts(response);
+      setSearch(response)})
+      .catch((error) => console.log(error));
+  }, []);
+
+  console.log(products)
+  console.log(search)
+
+  // function handleChange(value){
+  //   setQuery(value);
+  //   filtrar(value)
   // }
+
+  function handleChange(e){
+    e.preventDefault();
+    setSearchParams({query: e.target.value});
+    console.log(e.target.value)
+    filtrar(e.target.value)
+  }
+
+  const filtrar=(value)=>{
+    // if(!value) return true;
+    var results = search.filter((item)=>{
+      return item.name.includes(value.toLowerCase());
+    })
+    setProducts(results)
+  }
+  
+  //Filter category
+  const category = products.map((item) => item.category )
+  const TypeCategory = [...new Set(category)]
 
   return (
     <Wrapper>
@@ -112,37 +101,24 @@ function SearchPage({products, onhandleChange}){
           <BiSearch className="custtom__icon--size"/>
           {/* <form > */}
             <InputSearch 
-              id="query"
-              name="query"
+              // id="query"
+              // name="query"
+              value={searchParams.get("query") ?? ""}
               placeholder="Search"
-              onChange={({target}) => onhandleChange(target.value) }
+              onChange={handleChange }
+              // onChange={({target}) => handleChange(target.value) }
             />
           {/* </form> */}
         </div>
         <BiCart className="custtom__icon"/>
       </ContentInput>
       <Category>
-        {type.map((item)=>
-          <div key={item.category}>{item.category}</div>
+        {TypeCategory.map((item)=>
+          <div key={item}>{capitalize(item)}</div>
         )}
       </Category>
       <ContentCard>
-        {products ? products.map((products) => 
-        <FoodCard>
-          <CustomImg>
-            <img 
-            src={products.picture_url} 
-            alt="img-food"
-            className="img"
-            />
-          </CustomImg>
-          <Description >
-            <div className="description__product">
-              <Text size="l" bold>{products.name}</Text>
-              <Text size="l" bold color="#FA4A0C">{`$ ${Math.round((products.price * 0.01) * 100)/100}`}</Text>
-            </div>
-          </Description>
-        </FoodCard>) : "No hay data"}
+        <FoodCards DataProducts={products}/>
       </ContentCard>
     </Wrapper>
     

@@ -1,13 +1,11 @@
 import styled from "@emotion/styled";
 
-// const Label = Text.withComponent("label");
-
 const StyledInput = styled.input`
   padding: 0.5rem;
   border-radius: 1rem;
   border: none;
   background-color: var(--bg-2);
-  color: #333333;
+  color: var(--gray-300);
 `;
 
 const InputContainer = styled.div`
@@ -15,11 +13,6 @@ const InputContainer = styled.div`
   flex-direction: column;
   gap: 0.25rem;
 `;
-
-// const Error = styled(Text)`
-//   color: red;
-//   padding-left: 1rem;
-// `;
 
 function InputSearch({
   id,
@@ -34,7 +27,6 @@ function InputSearch({
 
   return (
     <InputContainer>
-      {/* {label && <Label htmlFor={id}>{label}</Label>} */}
       <StyledInput
         id={id}
         name={name}
@@ -42,7 +34,6 @@ function InputSearch({
         placeholder={placeholder}
         {...rest}
       />
-      {/* {error && <Error size="sm">{error}</Error>} */}
     </InputContainer>
   );
 }
