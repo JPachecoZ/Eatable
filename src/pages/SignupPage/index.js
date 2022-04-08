@@ -1,15 +1,22 @@
 import { useFormik } from "formik";
+import { useState } from "react";
 import FormikForm from "../../components/FormikForm";
+import { useAuth } from "../../context/auth-context";
 import { validateAuthentication } from "../../utils/validateAuth";
 
 function SignupPage() {
+  const { signup } = useAuth();
+  const [serverError, setServerError] = useState(null);
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     validate: validateAuthentication,
-    onSubmit: (values) => console.log(JSON.stringify(values, null, 2)),
+    onSubmit: (values) => {
+      signup(values).catch((e) => setServerError(e.message));
+    },
   });
 
   return (
@@ -18,6 +25,7 @@ function SignupPage() {
       types={{ email: "email", password: "password" }}
       labels={{ email: "Email address" }}
       submit="Signup"
+      serverError={serverError}
     />
   );
 }

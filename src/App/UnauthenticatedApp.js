@@ -60,6 +60,7 @@ function UnauthenticatedApp() {
       <main css={mainStyle}>
         <Routes>
           <Route index element={<Navigate to="/login" />} />
+          <Route path="*" element={<Navigate to="/login" />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
         </Routes>

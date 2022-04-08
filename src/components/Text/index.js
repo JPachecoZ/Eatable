@@ -3,7 +3,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
-function Text({ size, bold, color, children }) {
+function Text({ size, bold, color, centered, children, ...rest }) {
   let fontSize;
   let lineHeight;
 
@@ -34,7 +34,8 @@ function Text({ size, bold, color, children }) {
     font-size: ${fontSize};
     line-height: ${lineHeight};
     font-weight: ${bold ? "600" : "400"};
-    ${color && `color: ${color}`};
+    ${color && `color: ${color};`}
+    ${centered && `text-align: center;`}
   `;
 
   return <p css={style}>{children}</p>;
