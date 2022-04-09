@@ -4,11 +4,12 @@ export default async function apiFetch(
   endpoint,
   { method, headers, body } = {}
 ) {
-  const token = sessionStorage.getItem(tokenKey);
+  // const token = sessionStorage.getItem(tokenKey);
+  const token = "kAFAhDLQyKuGiyxiq3tPUdMh";
 
   if (token) {
     headers = {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Token token=${token}`,
       ...headers,
     };
   }
@@ -36,7 +37,7 @@ export default async function apiFetch(
     } catch (error) {
       throw new Error(response.statusText);
     }
-    throw new Error(JSON.stringify(data.errors));
+    throw new Error(data.errors);
   }
 
   try {
