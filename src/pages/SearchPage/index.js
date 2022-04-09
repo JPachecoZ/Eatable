@@ -1,7 +1,4 @@
-import { BiSearch } from "react-icons/bi";
-import { BiCart } from "react-icons/bi";
 import styled from "@emotion/styled";
-import InputSearch from "../../components/InputSearch";
 import capitalize from "./utils";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../services/products-service";
@@ -19,27 +16,6 @@ const Wrapper = styled.div`
   margin: 0 auto;
   min-height: 100vh;
 `;
-
-// const ContentInput = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding-bottom: 3.12rem;
-//   .content__search {
-//     display: flex;
-//     align-items: center;
-//     gap: 1rem;
-//   }
-//   .custtom__icon--size {
-//     width: 18px;
-//     height: 18px;
-//   }
-//   .custtom__icon {
-//     color: var(--gray-200);
-//     width: 24px;
-//     height: 24px;
-//   }
-// `;
 
 const ContentCard = styled.div`
   display: grid;
@@ -59,8 +35,8 @@ const Category = styled.p`
 
 function SearchPage(){
 
-  const [products, setProducts] = useState([]); 
-  const [search, setSearch] = useState([]); 
+  const [products, setProducts] = useState([]); // Todo la data
+  const [search, setSearch] = useState([]); // Data filtrada
   const [searchParams, setSearchParams] = useSearchParams();
   const querySearch = searchParams.get("query");
 
@@ -75,7 +51,7 @@ function SearchPage(){
         setSearch(response)
       }})
       .catch((error) => console.log(error));
-  }, []);
+  }, [querySearch]);
 
   function handleChange(e){
     setSearchParams({query: e.target.value});
@@ -83,7 +59,7 @@ function SearchPage(){
   }
 
   const filtrar=(value, search)=>{
-    // if(!value) return true;
+    if(!search) return true;
     var results = search.filter((item)=>{
       return item.name.toLowerCase().includes(value.toLowerCase());
     })
@@ -99,17 +75,6 @@ function SearchPage(){
     
     <Wrapper>
       <ContentSearch querySearch={querySearch} onhandleChange={handleChange}/>
-      {/* <ContentInput>
-        <div className="content__search">
-          <BiSearch className="custtom__icon--size"/>
-            <InputSearch 
-              value={querySearch ?? ""}
-              placeholder="Search"
-              onChange={handleChange }
-            />
-        </div>
-        <Link to="/cart"><BiCart className="custtom__icon"/></Link>
-      </ContentInput> */}
       {querySearch ? 
         <Text size="xl" bold centered>{`Found ${products.length} results`}</Text> : 
         <Category>

@@ -3,6 +3,7 @@ import { BiCart } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import InputSearch from "../InputSearch";
 import styled from "@emotion/styled";
+import Back from "../Back";
 
 
 const ContentInput = styled.div`
@@ -32,7 +33,7 @@ function ContentSearch({querySearch, onhandleChange}) {
   return (
     <ContentInput>
         <div className="content__search">
-          <BiSearch className="custtom__icon--size"/>
+          {querySearch ? <Back/> : <BiSearch className="custtom__icon--size"/>}
             <InputSearch 
               value={querySearch ?? ""}
               placeholder="Search"
