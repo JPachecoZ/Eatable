@@ -13,9 +13,9 @@ const Container = styled.section`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  height: 100vh;
   padding: 3.125rem;
   gap: 1.25rem;
+  min-height: 100vh;
 `
 
 const Title = styled.div`
@@ -64,6 +64,144 @@ export default function HistoryPage(){
       "id": 4,
       "items_count": 2,
       "total": 11625,
+      "delivery_address": "Lima-Peru",
+      "created_at": "2022-04-06T19:22:41.964Z",
+      "order_details": [
+        {
+          "id": 7,
+          "quantity": 1,
+          "subtotal": 2816,
+          "product_id": 1,
+          "product_name": "green cream"
+        },
+        {
+          "id": 8,
+          "quantity": 1,
+          "subtotal": 8809,
+          "product_id": 4,
+          "product_name": "zucchini cream"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "items_count": 2,
+      "total": 11625,
+      "delivery_address": "Lima-Peru",
+      "created_at": "2022-04-06T19:22:41.964Z",
+      "order_details": [
+        {
+          "id": 7,
+          "quantity": 1,
+          "subtotal": 2816,
+          "product_id": 1,
+          "product_name": "green cream"
+        },
+        {
+          "id": 8,
+          "quantity": 1,
+          "subtotal": 8809,
+          "product_id": 4,
+          "product_name": "zucchini cream"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "items_count": 2,
+      "total": 11625,
+      "delivery_address": "Lima-Peru",
+      "created_at": "2022-04-06T19:22:41.964Z",
+      "order_details": [
+        {
+          "id": 7,
+          "quantity": 1,
+          "subtotal": 2816,
+          "product_id": 1,
+          "product_name": "green cream"
+        },
+        {
+          "id": 8,
+          "quantity": 1,
+          "subtotal": 8809,
+          "product_id": 4,
+          "product_name": "zucchini cream"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "items_count": 2,
+      "total": 11625,
+      "delivery_address": "Lima-Peru",
+      "created_at": "2022-04-06T19:22:41.964Z",
+      "order_details": [
+        {
+          "id": 7,
+          "quantity": 1,
+          "subtotal": 2816,
+          "product_id": 1,
+          "product_name": "green cream"
+        },
+        {
+          "id": 8,
+          "quantity": 1,
+          "subtotal": 8809,
+          "product_id": 4,
+          "product_name": "zucchini cream"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "items_count": 2,
+      "total": 11625,
+      "delivery_address": "Lima-Peru",
+      "created_at": "2022-04-06T19:22:41.964Z",
+      "order_details": [
+        {
+          "id": 7,
+          "quantity": 1,
+          "subtotal": 2816,
+          "product_id": 1,
+          "product_name": "green cream"
+        },
+        {
+          "id": 8,
+          "quantity": 1,
+          "subtotal": 8809,
+          "product_id": 4,
+          "product_name": "zucchini cream"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "items_count": 2,
+      "total": 11625,
+      "delivery_address": "Lima-Peru",
+      "created_at": "2022-04-06T19:22:41.964Z",
+      "order_details": [
+        {
+          "id": 7,
+          "quantity": 1,
+          "subtotal": 2816,
+          "product_id": 1,
+          "product_name": "green cream"
+        },
+        {
+          "id": 8,
+          "quantity": 1,
+          "subtotal": 8809,
+          "product_id": 4,
+          "product_name": "zucchini cream"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "items_count": 2,
+      "total": 15625,
       "delivery_address": "Lima-Peru",
       "created_at": "2022-04-06T19:22:41.964Z",
       "order_details": [

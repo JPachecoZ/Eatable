@@ -22,8 +22,7 @@ const DataDetails = styled.div`
 
 const LineDiv = styled.div`
   height: 0.03rem;
-  opacity: 30%;
-  background-color: #000000;
+  background-color: var(--gray-300);
   width: 100%;
 `
 
@@ -49,7 +48,7 @@ export default function Order({order}){
         <Text size="s">{order.items_count} items</Text>
         <Text color="var(--accent-color)" size="s">$ {order.total/100}</Text>
       </TotalContainer>
-      {!isOpen ? "": <>
+      {isOpen && <>
         <Text bold size="m">Order</Text>
 
         {order.order_details.map((detail) => {
@@ -66,7 +65,7 @@ export default function Order({order}){
       }
       <TotalContainer>
         <div></div>
-        {isOpen ? <IoIosArrowUp style={{cursor: "pointer"}} onClick={(e) => toggleOpen(e, order.opened)}/> : <IoIosArrowDown style={{cursor: "pointer"}} onClick={(e) => toggleOpen(e, order.opened)}/>}
+        {isOpen ? <IoIosArrowUp style={{cursor: "pointer"}} onClick={(e) => toggleOpen(e)}/> : <IoIosArrowDown style={{cursor: "pointer"}} onClick={(e) => toggleOpen(e, order.opened)}/>}
       </TotalContainer>
     </DataDetails>
   )
