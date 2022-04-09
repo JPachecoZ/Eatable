@@ -3,6 +3,7 @@ import CardItem from "../../components/CardItem";
 import TotalCart from "../../components/TotalCart";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
+import { Link } from "react-router-dom";
 import { IoIosArrowBack } from 'react-icons/io'
 import { useNavigate } from "react-router-dom";
 
@@ -63,7 +64,7 @@ export default function CartPage(){
       </CardList>
       <Footer>
         <TotalCart total="$97.90"/>
-        <Button fullWidth>Checkout</Button>
+        <Link to="/checkout" style={{textDecoration: "none"}}><Button fullWidth>Checkout</Button></Link>
       </Footer>
     </Container>
   )

@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import TotalCart from "../../components/TotalCart";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
+import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from 'react-icons/io'
 
 const Container = styled.section`
@@ -58,11 +59,19 @@ const LineDiv = styled.div`
 `
 
 export default function CheckoutPage(){
+
+  const navigate = useNavigate();
+
+  function handleBack(e){
+    e.preventDefault();
+    navigate(-1);
+  }
+
   return(
     <Container>
       <div>
       <Title>
-        <IoIosArrowBack/>
+        <IoIosArrowBack style={{cursor: "pointer"}} onClick={(e) => handleBack(e)}/>
         <Text bold size="l">Checkout</Text>
         <div></div>
       </Title>
@@ -81,7 +90,7 @@ export default function CheckoutPage(){
       </div>
       <Footer>
         <TotalCart total="$27.90"/>
-        <Button fullWidth>Complete Order</Button>
+        <Button fullWidth >Complete Order</Button>
       </Footer>
     </Container>
   )
