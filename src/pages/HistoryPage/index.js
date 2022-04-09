@@ -3,6 +3,8 @@ import TotalCart from "../../components/TotalCart";
 import Text from "../../components/Text";
 import Order from "../../components/Order";
 import { IoIosArrowBack } from 'react-icons/io'
+import { useNavigate } from "react-router-dom";
+
 
 const Container = styled.section`
   max-width: 26rem;
@@ -83,11 +85,18 @@ export default function HistoryPage(){
     }
   ]
 
+  const navigate = useNavigate();
+
+  function handleBack(e){
+    e.preventDefault();
+    navigate(-1);
+  }
+
   return(
     <Container>
       <div>
       <Title>
-        <IoIosArrowBack/>
+        <IoIosArrowBack style={{cursor: "pointer"}} onClick={(e) => handleBack(e)}/>
         <Text bold size="l">History</Text>
         <div></div>
       </Title>
