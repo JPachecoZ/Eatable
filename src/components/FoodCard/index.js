@@ -54,8 +54,8 @@ function FoodCards({products}) {
   return (
     <>
     {products ? products.map((products) =>
-      <ConteinerLink to={"/product/" + products.id}>
-        <FoodCard  key={products.id}>
+      <ConteinerLink to={"/product/" + products.id} key={products.id}>
+        <FoodCard>
           <CustomImg>
             <img 
             src={products.picture_url} 

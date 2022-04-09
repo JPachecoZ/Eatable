@@ -1,4 +1,3 @@
-import { tokenKey } from "../config";
 import apiFetch from "./api-fetch";
 
 export function getProducts() {

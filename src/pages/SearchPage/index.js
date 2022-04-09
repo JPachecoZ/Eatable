@@ -55,10 +55,9 @@ const Category = styled.p`
 
 function SearchPage(){
 
-  const [products, setProducts] = useState([]); // data estatica
-  const [search, setSearch] = useState([]); // data dinámica
+  const [products, setProducts] = useState([]); 
+  const [search, setSearch] = useState([]); 
   const [searchParams, setSearchParams] = useSearchParams();
-  // const query = searchParams.get("query");
 
   useEffect(() => {
     getProducts()
@@ -73,15 +72,6 @@ function SearchPage(){
       .catch((error) => console.log(error));
   }, []);
 
-  console.log(products)
-  // useEffect(() => {
-  //   localStorage.setItem("eatable_query", query);
-  // },[query, searchParams])
-  // function handleChange(value){
-  //   setQuery(value);
-  //   filtrar(value)
-  // }
-
   function handleChange(e){
     setSearchParams({query: e.target.value});
     console.log(e.target.value)
@@ -89,10 +79,8 @@ function SearchPage(){
   }
 
   const filtrar=(value, search)=>{
-    
     // if(!value) return true;
     var results = search.filter((item)=>{
-    
       return item.name.toLowerCase().includes(value.toLowerCase());
     })
     console.log(results)
@@ -109,24 +97,17 @@ function SearchPage(){
       <ContentInput>
         <div className="content__search">
           <BiSearch className="custtom__icon--size"/>
-          {/* <form > */}
             <InputSearch 
-              // id="query"
-              // name="query"
               value={searchParams.get("query") ?? ""}
               placeholder="Search"
               onChange={handleChange }
-              // onChange={({target}) => handleChange(target.value) }
             />
-          {/* </form> */}
         </div>
-
         <Link to="/cart"><BiCart className="custtom__icon"/></Link>
-
       </ContentInput>
       <Category>
           {TypeCategory.map((item)=>
-            <Link to={item}><div key={item}>{capitalize(item)}</div></Link>
+            <Link to={item} key={item}>{capitalize(item)}</Link>
           )}
       </Category>
       <ContentCard>
