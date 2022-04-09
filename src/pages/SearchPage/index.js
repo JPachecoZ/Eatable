@@ -6,7 +6,7 @@ import capitalize from "./utils";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../services/products-service";
 import FoodCards from "../../components/FoodCard";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const Wrapper = styled.div`
   padding: 3.31rem 2.56rem;
@@ -57,42 +57,53 @@ function SearchPage(){
   const [products, setProducts] = useState([]); // data estatica
   const [search, setSearch] = useState([]); // data dinámica
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams)
+  // const query = searchParams.get("query");
 
   useEffect(() => {
     getProducts()
     .then(response => {
       setProducts(response);
-      setSearch(response)})
+
+      if(searchParams.get("query")){
+        setSearch(filtrar(searchParams.get("query"), response))
+      } else {
+        setSearch(response)
+      }})
       .catch((error) => console.log(error));
   }, []);
 
   console.log(products)
-  console.log(search)
-
+  // useEffect(() => {
+  //   localStorage.setItem("eatable_query", query);
+  // },[query, searchParams])
   // function handleChange(value){
   //   setQuery(value);
   //   filtrar(value)
   // }
 
   function handleChange(e){
-    e.preventDefault();
     setSearchParams({query: e.target.value});
     console.log(e.target.value)
-    filtrar(e.target.value)
+    filtrar(e.target.value, search)
   }
 
-  const filtrar=(value)=>{
+  const filtrar=(value, search)=>{
+    
     // if(!value) return true;
     var results = search.filter((item)=>{
-      return item.name.includes(value.toLowerCase());
+    
+      return item.name.toLowerCase().includes(value.toLowerCase());
     })
+    console.log(results)
     setProducts(results)
   }
   
-  //Filter category
   const category = products.map((item) => item.category )
   const TypeCategory = [...new Set(category)]
+  
+  // const filterCategory = products.filter((item)=> item.category === "peruvian")
+  
+
 
   return (
     <Wrapper>
@@ -113,12 +124,12 @@ function SearchPage(){
         <BiCart className="custtom__icon"/>
       </ContentInput>
       <Category>
-        {TypeCategory.map((item)=>
-          <div key={item}>{capitalize(item)}</div>
-        )}
+          {TypeCategory.map((item)=>
+            <Link to={item}><div key={item}>{capitalize(item)}</div></Link>
+          )}
       </Category>
       <ContentCard>
-        <FoodCards DataProducts={products}/>
+        <FoodCards products={products}/>
       </ContentCard>
     </Wrapper>
     

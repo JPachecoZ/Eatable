@@ -1,11 +1,17 @@
 import styled from "@emotion/styled";
 import Text from "../Text";
+import { Link } from "react-router-dom";
 
 const FoodCard = styled.div`
   position: relative;
   width: 156px;
   height: 250px;
 `;
+
+const ConteinerLink = styled(Link)`
+  text-decoration: none;
+  color: var(--gray-300);
+`
 
   const CustomImg = styled.div`
   .img {
@@ -43,28 +49,28 @@ const Description = styled.div`
   }
   `
 
-function FoodCards({DataProducts}) {
-
-  console.log(DataProducts)
-  
+function FoodCards({products}) {
+   
   return (
     <>
-    {DataProducts ? DataProducts.map((products) => 
-      <FoodCard>
-        <CustomImg>
-          <img 
-          src={products.picture_url} 
-          alt="img-food"
-          className="img"
-          />
-        </CustomImg>
-        <Description >
-          <div className="description__product">
-            <Text size="l" bold>{products.name}</Text>
-            <Text size="l" bold color="#FA4A0C">{`$ ${Math.round((products.price * 0.01) * 100)/100}`}</Text>
-          </div>
-        </Description>
-      </FoodCard>) : "No hay data"}
+    {products ? products.map((products) =>
+      <ConteinerLink to={"/product/" + products.id}>
+        <FoodCard  key={products.id}>
+          <CustomImg>
+            <img 
+            src={products.picture_url} 
+            alt="img-food"
+            className="img"
+            />
+          </CustomImg>
+          <Description >
+            <div className="description__product">
+              <Text size="l" bold>{products.name}</Text>
+              <Text size="l" bold color="#FA4A0C">{`$ ${Math.round((products.price * 0.01) * 100)/100}`}</Text>
+            </div>
+          </Description>
+        </FoodCard>
+      </ConteinerLink> ) : "No hay data"}
     </>
   )
 }

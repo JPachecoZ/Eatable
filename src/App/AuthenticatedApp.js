@@ -1,11 +1,11 @@
 import SearchPage from "../pages/SearchPage";
+import FoodPage from "../pages/FoodPage"
 import {HiHome} from "react-icons/hi"
 import {FiUser} from "react-icons/fi"
 import {GiBackwardTime} from "react-icons/gi"
 import styled from "@emotion/styled";
 import { Navigate, NavLink, Route, Routes } from "react-router-dom";
-import { getProducts } from "../services/products-service";
-import { useEffect, useState } from "react";
+
 
 const Navbar = styled.div`
   display: flex;
@@ -34,7 +34,10 @@ function AuthenticatedApp() {
     <div className="App">
       <Routes>
         <Route index element={<Navigate to="/home" />} />
-        <Route path="/home" element={<SearchPage/>} />
+        <Route path="/home" element={<SearchPage/>}>
+          <Route path="/home/:category" element={<SearchPage/>}/>
+        </Route>
+        <Route path="/product/:productId" element={<FoodPage/>} />
         <Route path="/profile" element={<div>Profile</div>} />
         <Route path="/orders" element={<div>Orders-Card</div>} />
       </Routes>
