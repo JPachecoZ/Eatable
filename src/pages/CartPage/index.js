@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { IoIosArrowBack } from 'react-icons/io'
 import { useNavigate } from "react-router-dom";
 
+
 const Container = styled.section`
   max-width: 415px;
   margin: auto;
@@ -14,33 +15,34 @@ const Container = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 100vh;
+  min-height: 100vh;
   padding: 50px;
   gap: 20px;
-`
+`;
 
 const Footer = styled.div`
   width: 100%;
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: 32px;
-`
+`;
 
 const CardList = styled.div`
-  display:flex;
+  display: flex;
   align-items: center;
   flex-direction: column;
   gap: 20px 0px;
-`
+`;
 
 const Title = styled.div`
   text-align: center;
   margin-bottom: 20px;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-`
+`;
+
 
 export default function CartPage(){
 
@@ -59,13 +61,15 @@ export default function CartPage(){
           <Text bold size="l">Cart</Text>
           <div></div>
         </Title>
-        <CardItem/>
-        <CardItem/>
+        <CardItem />
+        <CardItem />
       </CardList>
       <Footer>
+
         <TotalCart total="$97.90"/>
         <Link to="/checkout" style={{textDecoration: "none"}}><Button fullWidth>Checkout</Button></Link>
+
       </Footer>
     </Container>
-  )
+  );
 }

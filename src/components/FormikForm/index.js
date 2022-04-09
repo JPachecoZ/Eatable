@@ -2,9 +2,11 @@
 // it tells babel how to convert properly
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import Button from "../Button";
 import InputField from "../InputField";
+import Text from "../Text";
 
-function Form({ formik, types = {}, labels = {}, submit }) {
+function Form({ formik, types = {}, labels = {}, submit, serverError }) {
   const style = css`
     padding: 3.125rem;
     padding-bottom: 2.5rem;
@@ -13,12 +15,15 @@ function Form({ formik, types = {}, labels = {}, submit }) {
     gap: 3.75rem;
   `;
 
-  const buttonStyle = css``;
-
   const fields = Object.keys(formik.values);
 
   return (
-    <form css={style}>
+    <form css={style} onSubmit={formik.handleSubmit}>
+      {serverError && (
+        <Text size="xs" color="var(--error)" centered>
+          {serverError}
+        </Text>
+      )}
       {fields.map((field) => (
         <InputField
           key={field}
@@ -31,7 +36,9 @@ function Form({ formik, types = {}, labels = {}, submit }) {
         />
       ))}
 
-      <input type="submit" value={submit || "Submit"} css={buttonStyle} />
+      <Button type="submit" fullWidth>
+        {submit || "Submit"}
+      </Button>
     </form>
   );
 }
