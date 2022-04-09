@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Button from "../../components/Button";
-import Text from "../../components/Text";
+import Text from "../../components/Text"
+import { showProducts } from "../../services/products-service";
 
 const Wrapper = styled.div`
   padding: 3.31rem 2.56rem;
@@ -35,13 +38,27 @@ const NameProduct = styled.div`
   padding-bottom: 1.68rem;
 `;
 
-function FoodPage() {
+function FoodPage(){
+  const params = useParams();
+  const [dataFood, setDataFood] = useState({});
+
+  useEffect(()=>{
+    const id = +params.productId;
+    console.log(id)
+    showProducts(id).then(response => {
+      setDataFood(response)
+    })
+    .catch((error)=> console.log(error))
+  }, [params.productId]);
+
+  console.log(dataFood)
+
   return (
     <Wrapper>
       <FoodCard>
         <CustomImg>
-          <img
-            src="https://img.freepik.com/free-photo/top-view-green-cream-soups_23-2148519096.jpg"
+          <img 
+            src={dataFood.picture_url} 
             alt="img-food"
             className="img"
           />
@@ -49,21 +66,11 @@ function FoodPage() {
 
         <div>
           <NameProduct>
-            <Text size="xl" bold>
-              Green cream
-            </Text>
-            <Text size="xl" bold color="#FA4A0C">
-              $ 33.13
-            </Text>
+            <Text size="xl" bold>{dataFood.name}</Text>
+            <Text size="xl" bold color="#FA4A0C">{`$ ${Math.round((dataFood.price * 0.01) * 100)/100}`}</Text>
           </NameProduct>
-          <Text size="m" bold>
-            Description
-          </Text>
-          <Text size="s">
-            Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi
-            welsh onion daikon amaranth tatsoi tomatillo melon azuki bean
-            garlic.
-          </Text>
+          <Text size="m" bold>Description</Text>
+          <Text size="s">{dataFood.description}</Text>
         </div>
         <Button fullWidth>Add to Cart</Button>
       </FoodCard>

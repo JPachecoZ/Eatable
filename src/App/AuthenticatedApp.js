@@ -2,6 +2,7 @@ import SearchPage from "../pages/SearchPage";
 import CartPage from "../pages/CartPage";
 import HistoryPage from "../pages/HistoryPage";
 import CheckoutPage from "../pages/CheckoutPage";
+import FoodPage from "../pages/FoodPage"
 import {HiHome} from "react-icons/hi"
 import {FiUser} from "react-icons/fi"
 import {GiBackwardTime} from "react-icons/gi"
@@ -44,6 +45,7 @@ const Navbar = styled.nav`
 `;
 
 function AuthenticatedApp() {
+  
   return (
     <Fragment>
       {/* <SearchPage/> */}
@@ -51,7 +53,10 @@ function AuthenticatedApp() {
       <Routes>
         <Route index element={<Navigate to="/home" />} />
         <Route path="*" element={<Navigate to="/home" />} />
-        <Route path="/home" element={<SearchPage />} />
+        <Route path="/home" element={<SearchPage/>}>
+          <Route path="/home/:category" element={<SearchPage/>}/>
+        </Route>
+        <Route path="/product/:productId" element={<FoodPage/>} />
         <Route path="/profile" element={<div>Profile</div>} />
         <Route path="/orders" element={<HistoryPage/>}/>
         <Route path="/cart" element={<CartPage/>}/>
