@@ -1,32 +1,20 @@
-import { useEffect, useState } from "react";
-import AuthenticatedApp from "./AuthenticatedApp";
+import { lazy, Suspense } from "react";
 import UnauthenticatedApp from "./UnauthenticatedApp";
 import LoadingPage from "../pages/LoadingPage";
-import { login } from "../services/products-service";
+import { useAuth } from "../context/auth-context";
+
+const AuthenticatedApp = lazy(() => import("./AuthenticatedApp"));
 
 function App() {
-  const [user, setUser] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuth();
 
-  //Login - prueba
-  // const credentials = {
-  //   email: "test@mail.com",
-  //   password: "letmein"
-  // }
-
-  // useEffect(() => {
-  //   login(credentials)
-  //     .then(setUser) 
-  //     .catch((error) => console.log(error));
-  // }, []);
-  // console.log(user)
-  /////////////////////
-
-  if (isLoading) {
-    return <LoadingPage />;
-  } else {
-    return user ? <AuthenticatedApp /> : <UnauthenticatedApp />;
-  }
+  return user ? (
+    <Suspense fallback={<LoadingPage />}>
+      <AuthenticatedApp />
+    </Suspense>
+  ) : (
+    <UnauthenticatedApp />
+  );
 }
 
 export default App;

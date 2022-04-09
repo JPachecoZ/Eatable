@@ -1,5 +1,5 @@
-import {BiSearch} from "react-icons/bi"
-import {BiCart} from "react-icons/bi"
+import { BiSearch } from "react-icons/bi";
+import { BiCart } from "react-icons/bi";
 import styled from "@emotion/styled";
 import InputSearch from "../../components/InputSearch";
 import capitalize from "./utils";
@@ -9,9 +9,9 @@ import FoodCards from "../../components/FoodCard";
 import { Link, useSearchParams } from "react-router-dom";
 
 const Wrapper = styled.div`
-  padding: 3.31rem 2.56rem;
+  padding: 3rem 2.5rem;
   margin: 0 auto;
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 const ContentInput = styled.div`
@@ -24,7 +24,7 @@ const ContentInput = styled.div`
     align-items: center;
     gap: 1rem;
   }
-  .custtom__icon--size{
+  .custtom__icon--size {
     width: 18px;
     height: 18px;
   }
@@ -102,13 +102,11 @@ function SearchPage(){
   const TypeCategory = [...new Set(category)]
   
   // const filterCategory = products.filter((item)=> item.category === "peruvian")
-  
-
 
   return (
     <Wrapper>
       <ContentInput>
-        <div className="content__search">
+        <div className="content__search"
           <BiSearch className="custtom__icon--size"/>
           {/* <form > */}
             <InputSearch 
@@ -121,9 +119,9 @@ function SearchPage(){
             />
           {/* </form> */}
         </div>
-        <BiCart className="custtom__icon"/>
+        <BiCart className="custtom__icon" />
       </ContentInput>
-      <Category>
+      <Category
           {TypeCategory.map((item)=>
             <Link to={item}><div key={item}>{capitalize(item)}</div></Link>
           )}
@@ -132,8 +130,7 @@ function SearchPage(){
         <FoodCards products={products}/>
       </ContentCard>
     </Wrapper>
-    
-  )
+  );
 }
 
 export default SearchPage;

@@ -3,7 +3,7 @@ import CardItem from "../../components/CardItem";
 import TotalCart from "../../components/TotalCart";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
-import { IoIosArrowBack } from 'react-icons/io'
+import { IoIosArrowBack } from "react-icons/io";
 
 const Container = styled.section`
   max-width: 415px;
@@ -12,50 +12,52 @@ const Container = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 100vh;
+  min-height: 100vh;
   padding: 50px;
   gap: 20px;
-`
+`;
 
 const Footer = styled.div`
   width: 100%;
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: 32px;
-`
+`;
 
 const CardList = styled.div`
-  display:flex;
+  display: flex;
   align-items: center;
   flex-direction: column;
   gap: 20px 0px;
-`
+`;
 
 const Title = styled.div`
   text-align: center;
   margin-bottom: 20px;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-`
+`;
 
-export default function CartPage(){
-  return(
+export default function CartPage() {
+  return (
     <Container>
       <CardList>
         <Title>
-          <IoIosArrowBack/>
-          <Text bold size="l">Cart</Text>
+          <IoIosArrowBack />
+          <Text bold size="l">
+            Cart
+          </Text>
           <div></div>
         </Title>
-        <CardItem/>
-        <CardItem/>
+        <CardItem />
+        <CardItem />
       </CardList>
       <Footer>
-        <TotalCart total="$97.90"/>
+        <TotalCart total="$97.90" />
         <Button fullWidth>Checkout</Button>
       </Footer>
     </Container>
-  )
+  );
 }
