@@ -41,17 +41,32 @@ const NameProduct = styled.div`
 function FoodPage(){
   const params = useParams();
   const [dataFood, setDataFood] = useState({});
+  const [cartData, setCartData] = useState([]);
+  const [enableAddCart, setEnableAddCart] = useState(true);
 
   useEffect(()=>{
     const id = +params.productId;
-    console.log(id)
+    console.log(cartData);
     showProducts(id).then(response => {
-      setDataFood(response)
+      setDataFood(response);
+      productInCart || setEnableAddCart(false);
     })
     .catch((error)=> console.log(error))
   }, [params.productId]);
 
-  console.log(dataFood)
+  function productInCart(){
+    return cartData.find((value) => value.id === dataFood.id) ? true : false
+  }
+  
+
+  function handleAddToCart(e){
+    e.preventDefault();
+    console.log(cartData);
+    setCartData(cartData.push(dataFood));
+    
+    console.log("Added to Cart");
+    console.log(cartData);
+  }
 
   return (
     <Wrapper>
@@ -72,7 +87,7 @@ function FoodPage(){
           <Text size="m" bold>Description</Text>
           <Text size="s">{dataFood.description}</Text>
         </div>
-        <Button fullWidth>Add to Cart</Button>
+        <Button fullWidth onClick={(e) => handleAddToCart(e)} disabled={!enableAddCart}>Add to Cart</Button>
       </FoodCard>
     </Wrapper>
   );
