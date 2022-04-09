@@ -8,6 +8,7 @@ import { getProducts } from "../../services/products-service";
 import FoodCards from "../../components/FoodCard";
 import { Link, useSearchParams } from "react-router-dom";
 
+
 const Wrapper = styled.div`
   padding: 3rem 2.5rem;
   margin: 0 auto;
@@ -119,7 +120,9 @@ function SearchPage(){
             />
           {/* </form> */}
         </div>
-        <BiCart className="custtom__icon" />
+
+        <Link to="/cart"><BiCart className="custtom__icon"/></Link>
+
       </ContentInput>
       <Category
           {TypeCategory.map((item)=>

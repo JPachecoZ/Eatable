@@ -2,7 +2,9 @@ import styled from "@emotion/styled";
 import TotalCart from "../../components/TotalCart";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
-import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import { IoIosArrowBack } from 'react-icons/io'
+
 
 const Container = styled.section`
   max-width: 25.94rem;
@@ -57,41 +59,40 @@ const LineDiv = styled.div`
   width: 100%;
 `;
 
-export default function CheckoutPage() {
-  return (
+
+export default function CheckoutPage(){
+
+  const navigate = useNavigate();
+
+  function handleBack(e){
+    e.preventDefault();
+    navigate(-1);
+  }
+
+  return(
     <Container>
       <div>
-        <Title>
-          <IoIosArrowBack />
-          <Text bold size="l">
-            Checkout
-          </Text>
-          <div></div>
-        </Title>
-        <Text bold size="xl">
-          Delivery
-        </Text>
-        <DetailsHeading>
-          <Text bold size="m">
-            Address details
-          </Text>
-          <Text bold size="s" color="var(--accent-color)">
-            change
-          </Text>
-        </DetailsHeading>
-        <DataDetails>
-          <Text bold size="m">
-            Margarita Flores
-          </Text>
-          <LineDiv />
-          <Text size="m">Calle Rosales 123, urb El Jardin</Text>
-          <LineDiv />
-          <Text size="m">987654321</Text>
-        </DataDetails>
+      <Title>
+        <IoIosArrowBack style={{cursor: "pointer"}} onClick={(e) => handleBack(e)}/>
+        <Text bold size="l">Checkout</Text>
+        <div></div>
+      </Title>
+      <Text bold size="xl">Delivery</Text>
+      <DetailsHeading>
+        <Text bold size="m">Address details</Text>
+        <Text bold size="s" color="var(--accent-color)">change</Text>
+      </DetailsHeading>
+      <DataDetails>
+        <Text bold size="m">Margarita Flores</Text>
+        <LineDiv/>
+        <Text size="m">Calle Rosales 123, urb El Jardin</Text>
+        <LineDiv/>
+        <Text size="m">987654321</Text>
+      </DataDetails>
       </div>
       <Footer>
-        <TotalCart total="$27.90" />
-        <Button fullWidth>Complete Order</Button>
+        <TotalCart total="$27.90"/>
+        <Button fullWidth >Complete Order</Button>
       </Footer>
     </Container>
   );

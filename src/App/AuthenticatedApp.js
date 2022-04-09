@@ -1,4 +1,7 @@
 import SearchPage from "../pages/SearchPage";
+import CartPage from "../pages/CartPage";
+import HistoryPage from "../pages/HistoryPage";
+import CheckoutPage from "../pages/CheckoutPage";
 import FoodPage from "../pages/FoodPage"
 import {HiHome} from "react-icons/hi"
 import {FiUser} from "react-icons/fi"
@@ -55,7 +58,9 @@ function AuthenticatedApp() {
         </Route>
         <Route path="/product/:productId" element={<FoodPage/>} />
         <Route path="/profile" element={<div>Profile</div>} />
-        <Route path="/orders" element={<div>Orders-Card</div>} />
+        <Route path="/orders" element={<HistoryPage/>}/>
+        <Route path="/cart" element={<CartPage/>}/>
+        <Route path="/checkout" element={<CheckoutPage/>}/>
       </Routes>
       <Navbar>
         <NavLink to="home">
