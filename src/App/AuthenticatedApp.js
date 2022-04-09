@@ -69,7 +69,7 @@ function AuthenticatedApp() {
         <Route path="/product/:productId" element={<FoodPage onHandleCart={handleCart} cartData={cartData}/>} />
         <Route path="/profile" element={<div>Profile</div>} />
         <Route path="/orders" element={<HistoryPage/>}/>
-        <Route path="/cart" element={<CartPage cartData={cartData}/>}/>
+        <Route path="/cart" element={<CartPage onHandleCart={handleCart} cartData={cartData}/>}/>
         <Route path="/checkout" element={<CheckoutPage/>}/>
       </Routes>
       <Navbar>

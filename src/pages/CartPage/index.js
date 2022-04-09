@@ -6,6 +6,7 @@ import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 import { IoIosArrowBack } from 'react-icons/io'
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 
 const Container = styled.section`
@@ -44,10 +45,30 @@ const Title = styled.div`
 `;
 
 
-export default function CartPage({cartData}){
+export default function CartPage({onHandleCart, cartData}){
 
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    console.log(cartData);
+    const newCartData = [...cartData];
+
+    console.log(newCartData);
+    const newNewData = newCartData.map((value) => {
+      value["quantity"] = 1;
+      return value;
+    });
+    console.log(newNewData);
+    onHandleCart(newNewData);
+  }, []);
+
+  function handleSetQuantity(event, id, count){
+    const cartItem = cartData.find((value) => value.id === id);
+    cartItem.quantity += count;
+    const newCartData = cartData.filter((value) => value.id!==id);
+    onHandleCart([...newCartData, cartItem]);
+  }
+  
   function handleBack(e){
     e.preventDefault();
     navigate(-1);
@@ -61,8 +82,8 @@ export default function CartPage({cartData}){
           <Text bold size="l">Cart</Text>
           <div></div>
         </Title>
-        {cartData.map((data) => {
-          return (<CardItem key={data.id} data={data}/>)
+        {cartData.map((data) => {          
+          return (<CardItem key={data.id} data={data} quantity={data.quantity} onSetQuantity={handleSetQuantity}/>)
         })}
       </CardList>
       <Footer>
