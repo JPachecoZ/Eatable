@@ -1,13 +1,11 @@
-import { BiSearch } from "react-icons/bi";
+import { BiArrowBack, BiSearch } from "react-icons/bi";
 import { BiCart } from "react-icons/bi";
 import styled from "@emotion/styled";
 import InputSearch from "../../components/InputSearch";
-import capitalize from "./utils";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../services/products-service";
-import FoodCards from "../../components/FoodCard";
-import { Link, useSearchParams } from "react-router-dom";
-
+import { Link, Outlet, useParams, useSearchParams } from "react-router-dom";
+import CategoriesLinks from "../../components/CategoriesLinks";
 
 const Wrapper = styled.div`
   padding: 3rem 2.5rem;
@@ -36,102 +34,79 @@ const ContentInput = styled.div`
   }
 `;
 
-const ContentCard = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 2fr));
-  justify-items: center;
-  gap: 1.25rem;
-`;
-
-const Category = styled.p`
-  display: flex;
-  gap: 2.12rem;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  color: var(--gray-400);
-  padding-bottom: 2.18rem;
-  width: 100%;
-`;
-
-function SearchPage(){
-
-  const [products, setProducts] = useState([]); // data estatica
-  const [search, setSearch] = useState([]); // data dinámica
+function SearchPage() {
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  // const query = searchParams.get("query");
+  const params = useParams();
+  const query = searchParams.get("query");
+  const currentCategory = params.category;
 
   useEffect(() => {
     getProducts()
-    .then(response => {
-      setProducts(response);
-
-      if(searchParams.get("query")){
-        setSearch(filtrar(searchParams.get("query"), response))
-      } else {
-        setSearch(response)
-      }})
+      .then((response) => {
+        setProducts(response);
+      })
       .catch((error) => console.log(error));
   }, []);
 
-  console.log(products)
-  // useEffect(() => {
-  //   localStorage.setItem("eatable_query", query);
-  // },[query, searchParams])
-  // function handleChange(value){
-  //   setQuery(value);
-  //   filtrar(value)
-  // }
+  useEffect(() => {
+    const filteredByCategory = currentCategory
+      ? products.filter((product) => {
+          return product.category === currentCategory;
+        })
+      : products;
 
-  function handleChange(e){
-    setSearchParams({query: e.target.value});
-    console.log(e.target.value)
-    filtrar(e.target.value, search)
+    let timeOutId;
+    if (query) {
+      timeOutId = setTimeout(() => {
+        setFilteredProducts(filtrar(query, filteredByCategory));
+      }, 300);
+    } else {
+      setFilteredProducts(filteredByCategory);
+    }
+    return () => {
+      clearTimeout(timeOutId);
+    };
+  }, [query, products, currentCategory]);
+
+  function handleChange(event) {
+    setSearchParams({ query: event.target.value });
   }
 
-  const filtrar=(value, search)=>{
-    
-    // if(!value) return true;
-    var results = search.filter((item)=>{
-    
+  const filtrar = (value, arrToSearch) => {
+    const results = arrToSearch.filter((item) => {
       return item.name.toLowerCase().includes(value.toLowerCase());
-    })
-    console.log(results)
-    setProducts(results)
-  }
-  
-  const category = products.map((item) => item.category )
-  const TypeCategory = [...new Set(category)]
-  
-  // const filterCategory = products.filter((item)=> item.category === "peruvian")
+    });
+    return results;
+  };
+
+  const categories = [
+    ...new Set(products.map((item) => item.category.toLowerCase())),
+  ];
 
   return (
     <Wrapper>
       <ContentInput>
-        <div className="content__search"
-          <BiSearch className="custtom__icon--size"/>
-          {/* <form > */}
-            <InputSearch 
-              // id="query"
-              // name="query"
-              value={searchParams.get("query") ?? ""}
-              placeholder="Search"
-              onChange={handleChange }
-              // onChange={({target}) => handleChange(target.value) }
-            />
-          {/* </form> */}
-        </div>
-
-        <Link to="/cart"><BiCart className="custtom__icon"/></Link>
-
-      </ContentInput>
-      <Category
-          {TypeCategory.map((item)=>
-            <Link to={item}><div key={item}>{capitalize(item)}</div></Link>
+        <label htmlFor="query" className="content__search">
+          {query ? (
+            <BiArrowBack onClick={() => setSearchParams({})} />
+          ) : (
+            <BiSearch className="custtom__icon--size" />
           )}
-      </Category>
-      <ContentCard>
-        <FoodCards products={products}/>
-      </ContentCard>
+          <InputSearch
+            id="query"
+            value={searchParams.get("query") ?? ""}
+            placeholder="Search"
+            onChange={handleChange}
+          />
+        </label>
+        <Link to="/cart">
+          <BiCart className="custtom__icon" />
+        </Link>
+      </ContentInput>
+      <CategoriesLinks {...{ categories }} />
+      <Outlet context={{ products: filteredProducts }} />
     </Wrapper>
   );
 }
