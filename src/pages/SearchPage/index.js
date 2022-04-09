@@ -107,7 +107,7 @@ function SearchPage(){
   return (
     <Wrapper>
       <ContentInput>
-        <div className="content__search"
+        <div className="content__search">
           <BiSearch className="custtom__icon--size"/>
           {/* <form > */}
             <InputSearch 
@@ -124,7 +124,7 @@ function SearchPage(){
         <Link to="/cart"><BiCart className="custtom__icon"/></Link>
 
       </ContentInput>
-      <Category
+      <Category>
           {TypeCategory.map((item)=>
             <Link to={item}><div key={item}>{capitalize(item)}</div></Link>
           )}
