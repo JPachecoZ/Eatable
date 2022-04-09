@@ -6,35 +6,40 @@ import capitalize from "./utils";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../services/products-service";
 import FoodCards from "../../components/FoodCard";
+import ContentSearch from "../../components/ContentSearch"
 import { Link, useSearchParams } from "react-router-dom";
+import Text from "../../components/Text";
 
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction:column;
+  gap: 2.18rem;
   padding: 3rem 2.5rem;
   margin: 0 auto;
   min-height: 100vh;
 `;
 
-const ContentInput = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 3.12rem;
-  .content__search {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .custtom__icon--size {
-    width: 18px;
-    height: 18px;
-  }
-  .custtom__icon {
-    color: var(--gray-200);
-    width: 24px;
-    height: 24px;
-  }
-`;
+// const ContentInput = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding-bottom: 3.12rem;
+//   .content__search {
+//     display: flex;
+//     align-items: center;
+//     gap: 1rem;
+//   }
+//   .custtom__icon--size {
+//     width: 18px;
+//     height: 18px;
+//   }
+//   .custtom__icon {
+//     color: var(--gray-200);
+//     width: 24px;
+//     height: 24px;
+//   }
+// `;
 
 const ContentCard = styled.div`
   display: grid;
@@ -49,7 +54,6 @@ const Category = styled.p`
   flex-wrap: wrap;
   justify-content: flex-end;
   color: var(--gray-400);
-  padding-bottom: 2.18rem;
   width: 100%;
 `;
 
@@ -58,14 +62,15 @@ function SearchPage(){
   const [products, setProducts] = useState([]); 
   const [search, setSearch] = useState([]); 
   const [searchParams, setSearchParams] = useSearchParams();
+  const querySearch = searchParams.get("query");
 
   useEffect(() => {
     getProducts()
     .then(response => {
       setProducts(response);
 
-      if(searchParams.get("query")){
-        setSearch(filtrar(searchParams.get("query"), response))
+      if(querySearch){
+        setSearch(filtrar(querySearch, response))
       } else {
         setSearch(response)
       }})
@@ -74,7 +79,6 @@ function SearchPage(){
 
   function handleChange(e){
     setSearchParams({query: e.target.value});
-    console.log(e.target.value)
     filtrar(e.target.value, search)
   }
 
@@ -83,7 +87,6 @@ function SearchPage(){
     var results = search.filter((item)=>{
       return item.name.toLowerCase().includes(value.toLowerCase());
     })
-    console.log(results)
     setProducts(results)
   }
   
@@ -93,23 +96,28 @@ function SearchPage(){
   // const filterCategory = products.filter((item)=> item.category === "peruvian")
 
   return (
+    
     <Wrapper>
-      <ContentInput>
+      <ContentSearch querySearch={querySearch} onhandleChange={handleChange}/>
+      {/* <ContentInput>
         <div className="content__search">
           <BiSearch className="custtom__icon--size"/>
             <InputSearch 
-              value={searchParams.get("query") ?? ""}
+              value={querySearch ?? ""}
               placeholder="Search"
               onChange={handleChange }
             />
         </div>
         <Link to="/cart"><BiCart className="custtom__icon"/></Link>
-      </ContentInput>
-      <Category>
+      </ContentInput> */}
+      {querySearch ? 
+        <Text size="xl" bold centered>{`Found ${products.length} results`}</Text> : 
+        <Category>
           {TypeCategory.map((item)=>
             <Link to={item} key={item}>{capitalize(item)}</Link>
           )}
-      </Category>
+        </Category>
+      }
       <ContentCard>
         <FoodCards products={products}/>
       </ContentCard>
