@@ -73,7 +73,6 @@ function SearchPage(){
       .catch((error) => console.log(error));
   }, []);
 
-  console.log(products)
   // useEffect(() => {
   //   localStorage.setItem("eatable_query", query);
   // },[query, searchParams])
@@ -130,7 +129,7 @@ function SearchPage(){
           )}
       </Category>
       <ContentCard>
-        <FoodCards products={products}/>
+        <FoodCards products={products} />
       </ContentCard>
     </Wrapper>
   );

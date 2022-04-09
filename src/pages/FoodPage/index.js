@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/Button";
 import Text from "../../components/Text"
 import { showProducts } from "../../services/products-service";
@@ -38,34 +38,28 @@ const NameProduct = styled.div`
   padding-bottom: 1.68rem;
 `;
 
-function FoodPage(){
+function FoodPage({onHandleCart, cartData}){
   const params = useParams();
   const [dataFood, setDataFood] = useState({});
-  const [cartData, setCartData] = useState([]);
-  const [enableAddCart, setEnableAddCart] = useState(true);
-
+  const [productInCart, setProductInCart] = useState(false);
+  const navigate = useNavigate();
+  
   useEffect(()=>{
     const id = +params.productId;
-    console.log(cartData);
     showProducts(id).then(response => {
       setDataFood(response);
-      productInCart || setEnableAddCart(false);
+      setProductInCart(!!cartData.find((value) => value.id === response.id));
     })
     .catch((error)=> console.log(error))
   }, [params.productId]);
 
-  function productInCart(){
-    return cartData.find((value) => value.id === dataFood.id) ? true : false
-  }
-  
-
   function handleAddToCart(e){
     e.preventDefault();
-    console.log(cartData);
-    setCartData(cartData.push(dataFood));
+    console.log(dataFood);
+    onHandleCart([...cartData, dataFood]);
+    setProductInCart(true);
+//    navigate("/home");
     
-    console.log("Added to Cart");
-    console.log(cartData);
   }
 
   return (
@@ -87,7 +81,13 @@ function FoodPage(){
           <Text size="m" bold>Description</Text>
           <Text size="s">{dataFood.description}</Text>
         </div>
-        <Button fullWidth onClick={(e) => handleAddToCart(e)} disabled={!enableAddCart}>Add to Cart</Button>
+        <Button 
+          fullWidth 
+          onClick={(e) => handleAddToCart(e)} 
+          style={productInCart ? { opacity: "0.6"} : { opacity: "1" }}
+          disabled={productInCart}>
+            {!productInCart ? "Add to Cart" : "Added to Cart"}
+        </Button>
       </FoodCard>
     </Wrapper>
   );

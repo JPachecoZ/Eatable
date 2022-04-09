@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Text from "../Text";
 import Counter from "../Counter";
+import { useState } from "react";
 
 const StyledCardItem = styled.div`
   background-color: #FFFFFF;
@@ -18,7 +19,7 @@ const StyledImage = styled.img`
   height: 3.875rem;
   width: 3.875rem;
   border-radius: 100%;
-  object-fit: scale-down;
+  object-fit: cover;
   box-shadow: 0rem 1.25rem 1.25rem rgba(0, 0, 0, 0.2);
 `
 const StyledContainer = styled.div`
@@ -26,15 +27,21 @@ const StyledContainer = styled.div`
   flex-direction: column;
   gap: 0.5rem;
 `
-export default function CardItem(){
+export default function CardItem({data}){
+  const [quantity, setQuantity] = useState(1);
+
+  function handleSetQuantity(value){
+    setQuantity(quantity + value);
+  }
+
   return (
     <StyledCardItem>
-      <StyledImage src="https://www.thespruceeats.com/thmb/c57iCi93U2l6xHJ1Af4kz6OLo38=/3661x3661/smart/filters:no_upscale()/hawaiian-pizza-4691857-hero-01-1a8f6764c70e4113bbf31bd1a73aca2e.jpg"/>
+      <StyledImage src={data.picture_url}/>
       <StyledContainer>
-        <Text bold >Veggie tomato mix</Text>
-        <Text bold size="m" color="var(--accent-color)">$15.45</Text>
+        <Text cartList bold >{data.name}</Text>
+        <Text cartList bold size="m" color="var(--accent-color)">$ {(data.price/100 * quantity).toFixed(2)}</Text>
       </StyledContainer>
-      <Counter/>
+      <Counter quantity={quantity} onSetQuantity={handleSetQuantity}/>
     </StyledCardItem>
   )
 }
