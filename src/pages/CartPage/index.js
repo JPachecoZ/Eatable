@@ -4,6 +4,7 @@ import TotalCart from "../../components/TotalCart";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
 import { IoIosArrowBack } from 'react-icons/io'
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.section`
   max-width: 415px;
@@ -41,11 +42,19 @@ const Title = styled.div`
 `
 
 export default function CartPage(){
+
+  const navigate = useNavigate();
+
+  function handleBack(e){
+    e.preventDefault();
+    navigate(-1);
+  }
+
   return(
     <Container>
       <CardList>
         <Title>
-          <IoIosArrowBack/>
+          <IoIosArrowBack style={{cursor: "pointer"}} onClick={(e) => handleBack(e)}/>
           <Text bold size="l">Cart</Text>
           <div></div>
         </Title>
