@@ -8,7 +8,7 @@ import { FiUser } from "react-icons/fi";
 import { GiBackwardTime } from "react-icons/gi";
 import styled from "@emotion/styled";
 import { Navigate, NavLink, Route, Routes } from "react-router-dom";
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
 import Products from "../components/Products";
 
 const Navbar = styled.nav`
@@ -46,6 +46,17 @@ const Navbar = styled.nav`
 `;
 
 function AuthenticatedApp() {
+  const [cartData, setCartData] = useState(JSON.parse(localStorage.getItem("cartData")) || []);
+
+  useEffect(() =>{
+    localStorage.setItem("cartData", JSON.stringify(cartData))
+  }, [cartData])
+
+
+  function handleCart(data) {
+    setCartData(data);
+  }
+
   return (
     <Fragment>
       <Routes>

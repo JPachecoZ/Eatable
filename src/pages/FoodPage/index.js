@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/Button";
 import Text from "../../components/Text"
 import Back from "../../components/Back"
@@ -39,20 +39,29 @@ const NameProduct = styled.div`
   padding-bottom: 1.68rem;
 `;
 
-function FoodPage(){
+function FoodPage({onHandleCart, cartData}){
   const params = useParams();
   const [dataFood, setDataFood] = useState({});
-
+  const [productInCart, setProductInCart] = useState(false);
+  const navigate = useNavigate();
+  
   useEffect(()=>{
     const id = +params.productId;
-    console.log(id)
     showProducts(id).then(response => {
-      setDataFood(response)
+      setDataFood(response);
+      setProductInCart(!!cartData.find((value) => value.id === response.id));
     })
     .catch((error)=> console.log(error))
   }, [params.productId]);
 
-  console.log(dataFood)
+  function handleAddToCart(e){
+    e.preventDefault();
+    console.log(dataFood);
+    onHandleCart([...cartData, dataFood]);
+    setProductInCart(true);
+//    navigate("/home");
+    
+  }
 
   return (
     <Wrapper>
@@ -74,7 +83,13 @@ function FoodPage(){
           <Text size="m" bold>Description</Text>
           <Text size="s">{dataFood.description}</Text>
         </div>
-        <Button fullWidth>Add to Cart</Button>
+        <Button 
+          fullWidth 
+          onClick={(e) => handleAddToCart(e)} 
+          style={productInCart ? { opacity: "0.6"} : { opacity: "1" }}
+          disabled={productInCart}>
+            {!productInCart ? "Add to Cart" : "Added to Cart"}
+        </Button>
       </FoodCard>
     </Wrapper>
   );
