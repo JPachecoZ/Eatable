@@ -6,6 +6,7 @@ import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 import { IoIosArrowBack } from 'react-icons/io'
 import { useNavigate } from "react-router-dom";
+import Back from "../../components/Back";
 
 
 const Container = styled.section`
@@ -46,18 +47,11 @@ const Title = styled.div`
 
 export default function CartPage(){
 
-  const navigate = useNavigate();
-
-  function handleBack(e){
-    e.preventDefault();
-    navigate(-1);
-  }
-
   return(
     <Container>
       <CardList>
         <Title>
-          <IoIosArrowBack style={{cursor: "pointer"}} onClick={(e) => handleBack(e)}/>
+          <Back/>
           <Text bold size="l">Cart</Text>
           <div></div>
         </Title>

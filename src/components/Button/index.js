@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Text from "../Text"
 
 const StyledButton = styled.button`
-  padding: 0.5rem 1rem;
+  padding: 1.4rem 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@ const StyledButton = styled.button`
   color: var(--bg-2);
   border: none;
   cursor: pointer;
-  border-radius: 1rem;
+  border-radius: 1.8rem;
   width: ${(props) => (props.fullWidth ? "100%" : "fit-content")};
 `;
 

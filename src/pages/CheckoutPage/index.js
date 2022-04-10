@@ -4,6 +4,7 @@ import Text from "../../components/Text";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from 'react-icons/io'
+import Back from "../../components/Back";
 
 
 const Container = styled.section`
@@ -62,18 +63,11 @@ const LineDiv = styled.div`
 
 export default function CheckoutPage(){
 
-  const navigate = useNavigate();
-
-  function handleBack(e){
-    e.preventDefault();
-    navigate(-1);
-  }
-
   return(
     <Container>
       <div>
       <Title>
-        <IoIosArrowBack style={{cursor: "pointer"}} onClick={(e) => handleBack(e)}/>
+        <Back/>
         <Text bold size="l">Checkout</Text>
         <div></div>
       </Title>

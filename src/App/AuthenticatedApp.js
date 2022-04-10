@@ -48,8 +48,6 @@ function AuthenticatedApp() {
   
   return (
     <Fragment>
-      {/* <SearchPage/> */}
-      {/* <FoodPage/> */}
       <Routes>
         <Route index element={<Navigate to="/home" />} />
         <Route path="*" element={<Navigate to="/home" />} />
