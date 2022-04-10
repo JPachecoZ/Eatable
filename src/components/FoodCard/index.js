@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Text from "../Text";
 import { Link } from "react-router-dom";
 
-const FoodCard = styled.div`
+const FoodCardStyled = styled.div`
   position: relative;
   width: 156px;
   height: 250px;
@@ -11,9 +11,9 @@ const FoodCard = styled.div`
 const ConteinerLink = styled(Link)`
   text-decoration: none;
   color: var(--gray-300);
-`
+`;
 
-  const CustomImg = styled.div`
+const CustomImg = styled.div`
   .img {
     width: 130px;
     height: 130px;
@@ -23,15 +23,15 @@ const ConteinerLink = styled(Link)`
     position: absolute;
     left: 8.33%;
     right: 8.33%;
-    object-fit: cover;   
+    object-fit: cover;
   }
-`
+`;
 const Description = styled.div`
   position: absolute;
   width: 156px;
   height: 212px;
   top: 15.2%;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 30px 60px rgba(57, 57, 57, 0.1);
   border-radius: 30px;
   text-align: center;
@@ -47,32 +47,28 @@ const Description = styled.div`
     gap: 0.75rem;
     padding: 0px;
   }
-  `
+`;
 
-function FoodCards({products}) {
-   
+function FoodCard({ product }) {
   return (
-    <>
-    {products ? products.map((products) =>
-      <ConteinerLink to={"/product/" + products.id} >
-        <FoodCard  key={products.id}>
-          <CustomImg>
-            <img 
-            src={products.picture_url} 
-            alt="img-food"
-            className="img"
-            />
-          </CustomImg>
-          <Description >
-            <div className="description__product">
-              <Text size="l" bold>{products.name}</Text>
-              <Text size="l" bold color="#FA4A0C">{`$ ${Math.round((products.price * 0.01) * 100)/100}`}</Text>
-            </div>
-          </Description>
-        </FoodCard>
-      </ConteinerLink> ) : "No hay data"}
-    </>
-  )
+    <ConteinerLink to={"/product/" + product.id}>
+      <FoodCardStyled>
+        <CustomImg>
+          <img src={product.picture_url} alt="img-food" className="img" />
+        </CustomImg>
+        <Description>
+          <div className="description__product">
+            <Text size="l" bold>
+              {product.name}
+            </Text>
+            <Text size="l" bold color="#FA4A0C">{`$ ${
+              Math.round(product.price * 0.01 * 100) / 100
+            }`}</Text>
+          </div>
+        </Description>
+      </FoodCardStyled>
+    </ConteinerLink>
+  );
 }
 
-export default FoodCards;
+export default FoodCard;
