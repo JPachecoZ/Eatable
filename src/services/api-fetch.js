@@ -5,7 +5,6 @@ export default async function apiFetch(
   { method, headers, body } = {}
 ) {
   const token = sessionStorage.getItem(tokenKey);
-  // const token = "kAFAhDLQyKuGiyxiq3tPUdMh";
 
   if (token) {
     headers = {
@@ -37,7 +36,15 @@ export default async function apiFetch(
     } catch (error) {
       throw new Error(response.statusText);
     }
-    throw new Error(data.errors);
+    if (typeof data.errors === "object") {
+      let arr = [];
+      for (const key in data.errors) {
+        arr.push(`${key}: ${data.errors[key]}`);
+      }
+      throw new Error(arr);
+    } else {
+      throw new Error(data.errors);
+    }
   }
 
   try {

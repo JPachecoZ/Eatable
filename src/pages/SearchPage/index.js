@@ -1,12 +1,11 @@
+import { BiArrowBack, BiSearch } from "react-icons/bi";
+import { BiCart } from "react-icons/bi";
 import styled from "@emotion/styled";
-import capitalize from "./utils";
+import InputSearch from "../../components/InputSearch";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../services/products-service";
-import FoodCards from "../../components/FoodCard";
-import ContentSearch from "../../components/ContentSearch"
-import { Link, useSearchParams } from "react-router-dom";
-import Text from "../../components/Text";
-
+import { Link, Outlet, useParams, useSearchParams } from "react-router-dom";
+import CategoriesLinks from "../../components/CategoriesLinks";
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,75 +16,101 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 
-const ContentCard = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 2fr));
-  justify-items: center;
-  gap: 1.25rem;
-`;
-
-const Category = styled.p`
+const ContentInput = styled.div`
   display: flex;
-  gap: 2.12rem;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  color: var(--gray-400);
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 3.12rem;
+  .content__search {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .custtom__icon--size {
+    width: 18px;
+    height: 18px;
+  }
+  .custtom__icon {
+    color: var(--gray-200);
+    width: 24px;
+    height: 24px;
+  }
 `;
 
-function SearchPage(){
-
-  const [products, setProducts] = useState([]); // Todo la data
-  const [search, setSearch] = useState([]); // Data filtrada
+function SearchPage() {
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const querySearch = searchParams.get("query");
+  const params = useParams();
+  const query = searchParams.get("query");
+  const currentCategory = params.category;
 
   useEffect(() => {
     getProducts()
-    .then(response => {
-      setProducts(response);
-
-      if(querySearch){
-        setSearch(filtrar(querySearch, response))
-      } else {
-        setSearch(response)
-      }})
+      .then((response) => {
+        setProducts(response);
+      })
       .catch((error) => console.log(error));
-  }, [querySearch]);
+  }, []);
 
-  function handleChange(e){
-    setSearchParams({query: e.target.value});
-    filtrar(e.target.value, search)
+  useEffect(() => {
+    const filteredByCategory = currentCategory
+      ? products.filter((product) => {
+          return product.category === currentCategory;
+        })
+      : products;
+
+    let timeOutId;
+    if (query) {
+      timeOutId = setTimeout(() => {
+        setFilteredProducts(filtrar(query, filteredByCategory));
+      }, 300);
+    } else {
+      setFilteredProducts(filteredByCategory);
+    }
+    return () => {
+      clearTimeout(timeOutId);
+    };
+  }, [query, products, currentCategory]);
+
+  function handleChange(event) {
+    setSearchParams({ query: event.target.value });
   }
 
-  const filtrar=(value, search)=>{
-    if(!search) return true;
-    var results = search.filter((item)=>{
+  const filtrar = (value, arrToSearch) => {
+    const results = arrToSearch.filter((item) => {
       return item.name.toLowerCase().includes(value.toLowerCase());
-    })
-    setProducts(results)
-  }
-  
-  const category = products.map((item) => item.category )
-  const TypeCategory = [...new Set(category)]
-  
-  // const filterCategory = products.filter((item)=> item.category === "peruvian")
+    });
+    return results;
+  };
+
+  const categories = [
+    ...new Set(products.map((item) => item.category.toLowerCase())),
+  ];
 
   return (
     
     <Wrapper>
-      <ContentSearch querySearch={querySearch} onhandleChange={handleChange}/>
-      {querySearch ? 
-        <Text size="xl" bold centered>{`Found ${products.length} results`}</Text> : 
-        <Category>
-          {TypeCategory.map((item)=>
-            <Link to={item} key={item}>{capitalize(item)}</Link>
+      <ContentInput>
+        <label htmlFor="query" className="content__search">
+          {query ? (
+            <BiArrowBack onClick={() => setSearchParams({})} />
+          ) : (
+            <BiSearch className="custtom__icon--size" />
           )}
-        </Category>
-      }
-      <ContentCard>
-        <FoodCards products={products}/>
-      </ContentCard>
+          <InputSearch
+            id="query"
+            value={searchParams.get("query") ?? ""}
+            placeholder="Search"
+            onChange={handleChange}
+          />
+        </label>
+        <Link to="/cart">
+          <BiCart className="custtom__icon" />
+        </Link>
+      </ContentInput>
+      <CategoriesLinks {...{ categories }} />
+      <Outlet context={{ products: filteredProducts }} />
     </Wrapper>
   );
 }
