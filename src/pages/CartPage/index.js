@@ -4,10 +4,9 @@ import TotalCart from "../../components/TotalCart";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
-import { IoIosArrowBack } from 'react-icons/io'
+import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import Back from "../../components/Back";
-
 
 const Container = styled.section`
   max-width: 415px;
@@ -44,25 +43,26 @@ const Title = styled.div`
   width: 100%;
 `;
 
-
-export default function CartPage({cartData})
-  return(
+export default function CartPage({ cartData }) {
+  return (
     <Container>
       <CardList>
         <Title>
-          <Back/>
-          <Text bold size="l">Cart</Text>
+          <Back />
+          <Text bold size="l">
+            Cart
+          </Text>
           <div></div>
         </Title>
         {cartData.map((data) => {
-          return (<CardItem key={data.id} data={data}/>)
+          return <CardItem key={data.id} data={data} />;
         })}
       </CardList>
       <Footer>
-
-        <TotalCart total="$97.90"/>
-        <Link to="/checkout" style={{textDecoration: "none"}}><Button fullWidth>Checkout</Button></Link>
-
+        <TotalCart total="$97.90" />
+        <Link to="/checkout" style={{ textDecoration: "none" }}>
+          <Button fullWidth>Checkout</Button>
+        </Link>
       </Footer>
     </Container>
   );
