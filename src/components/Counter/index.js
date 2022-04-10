@@ -26,19 +26,13 @@ const StyledIcon = styled.div`
   justify-content: center;
 `
 
-export default function Counter({quantity, onSetQuantity}){
-
-function handleQuantity(e, value){
-  if (quantity-1 < 1 && value < 0) {return};
-  e.preventDefault();
-  onSetQuantity(value);
-}
+export default function Counter({id, quantity, onSetQuantity}){
 
   return (
     <StyledCounter>
-      <StyledIcon style={{cursor: "pointer"}} onClick={(e) => handleQuantity(e, -1)}><FaMinus/></StyledIcon>
+      <StyledIcon style={{cursor: "pointer"}} onClick={(e) => onSetQuantity(e, id, -1)}><FaMinus/></StyledIcon>
       <Text bold size="m">{quantity}</Text>
-      <StyledIcon style={{cursor: "pointer"}} onClick={(e) => handleQuantity(e, +1)}><FaPlus/></StyledIcon>
+      <StyledIcon style={{cursor: "pointer"}} onClick={(e) => onSetQuantity(e, id, +1)}><FaPlus/></StyledIcon>
     </StyledCounter>
   )
 }

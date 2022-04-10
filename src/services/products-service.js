@@ -7,3 +7,7 @@ export function getProducts() {
 export function showProducts(id) {
   return apiFetch(`products/${id}`);
 }
+
+export function completeOrder(orderData){
+  return apiFetch("orders", orderData);
+}

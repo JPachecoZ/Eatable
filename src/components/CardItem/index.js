@@ -27,21 +27,16 @@ const StyledContainer = styled.div`
   flex-direction: column;
   gap: 0.5rem;
 `
-export default function CardItem({data}){
-  const [quantity, setQuantity] = useState(1);
-
-  function handleSetQuantity(value){
-    setQuantity(quantity + value);
-  }
+export default function CardItem({data, quantity, onSetQuantity}){
 
   return (
-    <StyledCardItem>
+    <StyledCardItem key={data.id}>
       <StyledImage src={data.picture_url}/>
-      <StyledContainer>
+      <StyledContainer >
         <Text cartList bold >{data.name}</Text>
         <Text cartList bold size="m" color="var(--accent-color)">$ {(data.price/100 * quantity).toFixed(2)}</Text>
       </StyledContainer>
-      <Counter quantity={quantity} onSetQuantity={handleSetQuantity}/>
+      <Counter id={data.id} quantity={quantity} onSetQuantity={onSetQuantity}/>
     </StyledCardItem>
   )
 }
