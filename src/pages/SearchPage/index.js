@@ -8,6 +8,9 @@ import { Link, Outlet, useParams, useSearchParams } from "react-router-dom";
 import CategoriesLinks from "../../components/CategoriesLinks";
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction:column;
+  gap: 2.18rem;
   padding: 3rem 2.5rem;
   margin: 0 auto;
   min-height: 100vh;
@@ -86,6 +89,7 @@ function SearchPage() {
   ];
 
   return (
+    
     <Wrapper>
       <ContentInput>
         <label htmlFor="query" className="content__search">

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Button from "../../components/Button";
 import Text from "../../components/Text"
+import Back from "../../components/Back"
 import { showProducts } from "../../services/products-service";
 
 const Wrapper = styled.div`
@@ -56,6 +57,7 @@ function FoodPage(){
   return (
     <Wrapper>
       <FoodCard>
+        <Back/>
         <CustomImg>
           <img 
             src={dataFood.picture_url} 
