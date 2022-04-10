@@ -2,13 +2,15 @@ import SearchPage from "../pages/SearchPage";
 import CartPage from "../pages/CartPage";
 import HistoryPage from "../pages/HistoryPage";
 import CheckoutPage from "../pages/CheckoutPage";
-import FoodPage from "../pages/FoodPage"
-import {HiHome} from "react-icons/hi"
-import {FiUser} from "react-icons/fi"
-import {GiBackwardTime} from "react-icons/gi"
+import FoodPage from "../pages/FoodPage";
+import { HiHome } from "react-icons/hi";
+import { FiUser } from "react-icons/fi";
+import { GiBackwardTime } from "react-icons/gi";
 import styled from "@emotion/styled";
 import { Navigate, NavLink, Route, Routes } from "react-router-dom";
 import { Fragment, useState, useEffect } from "react";
+import Products from "../components/Products";
+import ProfilePage from "../pages/ProfilePage";
 
 const Navbar = styled.nav`
   position: sticky;
@@ -45,12 +47,13 @@ const Navbar = styled.nav`
 `;
 
 function AuthenticatedApp() {
-  const [cartData, setCartData] = useState(JSON.parse(localStorage.getItem("cartData")) || []);
+  const [cartData, setCartData] = useState(
+    JSON.parse(localStorage.getItem("cartData")) || []
+  );
 
-  useEffect(() =>{
-    localStorage.setItem("cartData", JSON.stringify(cartData))
-  }, [cartData])
-
+  useEffect(() => {
+    localStorage.setItem("cartData", JSON.stringify(cartData));
+  }, [cartData]);
 
   function handleCart(data) {
     setCartData(data);
@@ -58,19 +61,21 @@ function AuthenticatedApp() {
 
   return (
     <Fragment>
-      {/* <SearchPage/> */}
-      {/* <FoodPage/> */}
       <Routes>
         <Route index element={<Navigate to="/home" />} />
         <Route path="*" element={<Navigate to="/home" />} />
         <Route path="/home" element={<SearchPage />}>
-          <Route path="/home/:category" element={<SearchPage/>}/>
+          <Route index element={<Products />} />
+          <Route path=":category" element={<Products />} />
         </Route>
-        <Route path="/product/:productId" element={<FoodPage onHandleCart={handleCart} cartData={cartData}/>} />
-        <Route path="/profile" element={<div>Profile</div>} />
-        <Route path="/orders" element={<HistoryPage/>}/>
-        <Route path="/cart" element={<CartPage onHandleCart={handleCart} cartData={cartData}/>}/>
-        <Route path="/checkout" element={<CheckoutPage cartData={cartData}/>}/>
+        <Route
+          path="/product/:productId"
+          element={<FoodPage onHandleCart={handleCart} {...{ cartData }} />}
+        />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/orders" element={<HistoryPage />} />
+        <Route path="/cart" element={<CartPage  onHandleCart={handleCart} {...{ cartData }} />} />
+        <Route path="/checkout" element={<CheckoutPage cartData={cartData} />} />
       </Routes>
       <Navbar>
         <NavLink to="home">

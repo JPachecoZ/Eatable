@@ -4,10 +4,10 @@ import TotalCart from "../../components/TotalCart";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
-import { IoIosArrowBack } from 'react-icons/io'
+import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-
+import Back from "../../components/Back";
 
 const Container = styled.section`
   max-width: 415px;
@@ -43,7 +43,6 @@ const Title = styled.div`
   justify-content: space-between;
   width: 100%;
 `;
-
 
 export default function CartPage({onHandleCart, cartData}){
 
@@ -82,8 +81,10 @@ export default function CartPage({onHandleCart, cartData}){
     <Container>
       <CardList>
         <Title>
-          <IoIosArrowBack style={{cursor: "pointer"}} onClick={(e) => handleBack(e)}/>
-          <Text bold size="l">Cart</Text>
+          <Back />
+          <Text bold size="l">
+            Cart
+          </Text>
           <div></div>
         </Title>
         {cartData.map((data) => {          
@@ -94,7 +95,6 @@ export default function CartPage({onHandleCart, cartData}){
 
         <TotalCart total={"$"+(total/100).toFixed(2)}/>
         <Link to="/checkout" style={{textDecoration: "none"}}><Button fullWidth>Checkout</Button></Link>
-
       </Footer>
     </Container>
   );

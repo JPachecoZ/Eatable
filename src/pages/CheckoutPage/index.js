@@ -6,6 +6,7 @@ import { completeOrder } from "../../services/products-service";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from 'react-icons/io'
 import { useAuth } from "../../context/auth-context";
+import Back from "../../components/Back";
 
 const Container = styled.section`
   max-width: 25.94rem;
@@ -90,7 +91,7 @@ export default function CheckoutPage({cartData}){
     <Container>
       <div>
       <Title>
-        <IoIosArrowBack style={{cursor: "pointer"}} onClick={(e) => handleBack(e)}/>
+        <Back/>
         <Text bold size="l">Checkout</Text>
         <div></div>
       </Title>

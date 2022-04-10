@@ -4,6 +4,7 @@ import Text from "../../components/Text";
 import Order from "../../components/Order";
 import { IoIosArrowBack } from 'react-icons/io'
 import { useNavigate } from "react-router-dom";
+import Back from "../../components/Back";
 
 
 const Container = styled.section`
@@ -223,18 +224,11 @@ export default function HistoryPage(){
     }
   ]
 
-  const navigate = useNavigate();
-
-  function handleBack(e){
-    e.preventDefault();
-    navigate(-1);
-  }
-
   return(
     <Container>
       <div>
       <Title>
-        <IoIosArrowBack style={{cursor: "pointer"}} onClick={(e) => handleBack(e)}/>
+        <Back/>
         <Text bold size="l">History</Text>
         <div></div>
       </Title>
