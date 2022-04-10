@@ -45,8 +45,7 @@ const Title = styled.div`
 `;
 
 
-export default function CartPage(){
-
+export default function CartPage({cartData})
   return(
     <Container>
       <CardList>
@@ -55,8 +54,9 @@ export default function CartPage(){
           <Text bold size="l">Cart</Text>
           <div></div>
         </Title>
-        <CardItem />
-        <CardItem />
+        {cartData.map((data) => {
+          return (<CardItem key={data.id} data={data}/>)
+        })}
       </CardList>
       <Footer>
 

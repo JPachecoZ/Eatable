@@ -15,7 +15,9 @@ function SignupPage() {
     },
     validate: validateAuthentication,
     onSubmit: (values) => {
-      signup(values).catch((e) => setServerError(e.message));
+      signup(values).catch((error) => {
+        setServerError(error.message);
+      });
     },
   });
 

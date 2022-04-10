@@ -2,13 +2,14 @@ import SearchPage from "../pages/SearchPage";
 import CartPage from "../pages/CartPage";
 import HistoryPage from "../pages/HistoryPage";
 import CheckoutPage from "../pages/CheckoutPage";
-import FoodPage from "../pages/FoodPage"
-import {HiHome} from "react-icons/hi"
-import {FiUser} from "react-icons/fi"
-import {GiBackwardTime} from "react-icons/gi"
+import FoodPage from "../pages/FoodPage";
+import { HiHome } from "react-icons/hi";
+import { FiUser } from "react-icons/fi";
+import { GiBackwardTime } from "react-icons/gi";
 import styled from "@emotion/styled";
 import { Navigate, NavLink, Route, Routes } from "react-router-dom";
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
+import Products from "../components/Products";
 
 const Navbar = styled.nav`
   position: sticky;
@@ -45,20 +46,31 @@ const Navbar = styled.nav`
 `;
 
 function AuthenticatedApp() {
-  
+  const [cartData, setCartData] = useState(JSON.parse(localStorage.getItem("cartData")) || []);
+
+  useEffect(() =>{
+    localStorage.setItem("cartData", JSON.stringify(cartData))
+  }, [cartData])
+
+
+  function handleCart(data) {
+    setCartData(data);
+  }
+
   return (
     <Fragment>
       <Routes>
         <Route index element={<Navigate to="/home" />} />
         <Route path="*" element={<Navigate to="/home" />} />
-        <Route path="/home" element={<SearchPage/>}>
-          <Route path="/home/:category" element={<SearchPage/>}/>
+        <Route path="/home" element={<SearchPage />}>
+          <Route index element={<Products />} />
+          <Route path=":category" element={<Products />} />
         </Route>
-        <Route path="/product/:productId" element={<FoodPage/>} />
+        <Route path="/product/:productId" element={<FoodPage />} />
         <Route path="/profile" element={<div>Profile</div>} />
-        <Route path="/orders" element={<HistoryPage/>}/>
-        <Route path="/cart" element={<CartPage/>}/>
-        <Route path="/checkout" element={<CheckoutPage/>}/>
+        <Route path="/orders" element={<HistoryPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
       <Navbar>
         <NavLink to="home">

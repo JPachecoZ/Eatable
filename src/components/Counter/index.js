@@ -6,6 +6,7 @@ import { FaPlus } from 'react-icons/fa'
 const StyledCounter = styled.div`
   background-color: var(--accent-color);
   border-radius: 1.875rem;
+  padding: 0.75rem 2rem;
   height: 1.25rem;
   width: 3.25rem;
   align-self: flex-end;
@@ -25,12 +26,19 @@ const StyledIcon = styled.div`
   justify-content: center;
 `
 
-export default function Counter(){
+export default function Counter({quantity, onSetQuantity}){
+
+function handleQuantity(e, value){
+  if (quantity-1 < 1 && value < 0) {return};
+  e.preventDefault();
+  onSetQuantity(value);
+}
+
   return (
     <StyledCounter>
-      <StyledIcon><FaMinus/></StyledIcon>
-      <Text bold size="m">1</Text>
-      <StyledIcon><FaPlus/></StyledIcon>
+      <StyledIcon style={{cursor: "pointer"}} onClick={(e) => handleQuantity(e, -1)}><FaMinus/></StyledIcon>
+      <Text bold size="m">{quantity}</Text>
+      <StyledIcon style={{cursor: "pointer"}} onClick={(e) => handleQuantity(e, +1)}><FaPlus/></StyledIcon>
     </StyledCounter>
   )
 }
