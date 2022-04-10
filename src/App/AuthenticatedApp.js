@@ -10,6 +10,7 @@ import styled from "@emotion/styled";
 import { Navigate, NavLink, Route, Routes } from "react-router-dom";
 import { Fragment, useState, useEffect } from "react";
 import Products from "../components/Products";
+import ProfilePage from "../pages/ProfilePage";
 
 const Navbar = styled.nav`
   position: sticky;
@@ -46,12 +47,13 @@ const Navbar = styled.nav`
 `;
 
 function AuthenticatedApp() {
-  const [cartData, setCartData] = useState(JSON.parse(localStorage.getItem("cartData")) || []);
+  const [cartData, setCartData] = useState(
+    JSON.parse(localStorage.getItem("cartData")) || []
+  );
 
-  useEffect(() =>{
-    localStorage.setItem("cartData", JSON.stringify(cartData))
-  }, [cartData])
-
+  useEffect(() => {
+    localStorage.setItem("cartData", JSON.stringify(cartData));
+  }, [cartData]);
 
   function handleCart(data) {
     setCartData(data);
@@ -66,10 +68,13 @@ function AuthenticatedApp() {
           <Route index element={<Products />} />
           <Route path=":category" element={<Products />} />
         </Route>
-        <Route path="/product/:productId" element={<FoodPage />} />
-        <Route path="/profile" element={<div>Profile</div>} />
+        <Route
+          path="/product/:productId"
+          element={<FoodPage onHandleCart={handleCart} {...{ cartData }} />}
+        />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/orders" element={<HistoryPage />} />
-        <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart" element={<CartPage {...{ cartData }} />} />
         <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
       <Navbar>
