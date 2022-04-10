@@ -70,7 +70,7 @@ function AuthenticatedApp() {
         <Route path="/profile" element={<div>Profile</div>} />
         <Route path="/orders" element={<HistoryPage/>}/>
         <Route path="/cart" element={<CartPage onHandleCart={handleCart} cartData={cartData}/>}/>
-        <Route path="/checkout" element={<CheckoutPage/>}/>
+        <Route path="/checkout" element={<CheckoutPage cartData={cartData}/>}/>
       </Routes>
       <Navbar>
         <NavLink to="home">

@@ -2,9 +2,10 @@ import styled from "@emotion/styled";
 import TotalCart from "../../components/TotalCart";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
+import { completeOrder } from "../../services/products-service";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from 'react-icons/io'
-
+import { useAuth } from "../../context/auth-context";
 
 const Container = styled.section`
   max-width: 25.94rem;
@@ -50,6 +51,7 @@ const DataDetails = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
+  min-width: 19.7rem;
 `;
 
 const LineDiv = styled.div`
@@ -60,13 +62,28 @@ const LineDiv = styled.div`
 `;
 
 
-export default function CheckoutPage(){
+export default function CheckoutPage({cartData}){
 
+  const { user } = useAuth();
   const navigate = useNavigate();
+
+  const newCartData = [...cartData];
+  const total = newCartData.reduce((acc, obj) => {return acc + (obj.quantity * obj.price)},0);
+  const orderDetails = newCartData.map((value) => {return {id: value.id, quantity: value.quantity}})
+
+  const orderData = {
+    delivery_address: user.address,
+    items: orderDetails
+  }
 
   function handleBack(e){
     e.preventDefault();
     navigate(-1);
+  }
+
+  function handleCompleteOrder(e){
+    e.preventDefault();
+    completeOrder(orderData);
   }
 
   return(
@@ -83,16 +100,16 @@ export default function CheckoutPage(){
         <Text bold size="s" color="var(--accent-color)">change</Text>
       </DetailsHeading>
       <DataDetails>
-        <Text bold size="m">Margarita Flores</Text>
+        <Text bold size="m">{user.name}</Text>
         <LineDiv/>
-        <Text size="m">Calle Rosales 123, urb El Jardin</Text>
+        <Text size="m">{user.address}</Text>
         <LineDiv/>
-        <Text size="m">987654321</Text>
+        <Text size="m">{user.phone}</Text>
       </DataDetails>
       </div>
       <Footer>
-        <TotalCart total="$27.90"/>
-        <Button fullWidth >Complete Order</Button>
+        <TotalCart total={"$"+(total/100).toFixed(2)}/>
+        <Button fullWidth onClick={(e) => handleCompleteOrder(e)}>Complete Order</Button>
       </Footer>
     </Container>
   );
