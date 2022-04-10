@@ -48,25 +48,29 @@ const Title = styled.div`
 export default function CartPage({onHandleCart, cartData}){
 
   const navigate = useNavigate();
+  const [total, setTotal] = useState(0);
 
-  useEffect(()=>{
-    console.log(cartData);
-    const newCartData = [...cartData];
-
-    console.log(newCartData);
+  useEffect(()=>{    
+    const newCartData = [...cartData]; 
     const newNewData = newCartData.map((value) => {
       value["quantity"] = 1;
       return value;
-    });
-    console.log(newNewData);
+    }).sort((value) => value.id);
+    const total = newNewData.reduce((acc, obj) => {return acc + (obj.quantity * obj.price)},0);
+    setTotal(total);
     onHandleCart(newNewData);
   }, []);
 
   function handleSetQuantity(event, id, count){
-    const cartItem = cartData.find((value) => value.id === id);
-    cartItem.quantity += count;
-    const newCartData = cartData.filter((value) => value.id!==id);
-    onHandleCart([...newCartData, cartItem]);
+    const newCartData = [...cartData];
+    const index = newCartData.findIndex((value) => value.id === id);
+    if (newCartData[index]["quantity"] === 1 && count < 0){
+      return;
+    }
+    newCartData[index]["quantity"] += count;
+    const total = newCartData.reduce((acc, obj) => {return acc + (obj.quantity * obj.price)},0);
+    setTotal(total);
+    onHandleCart(newCartData);
   }
   
   function handleBack(e){
@@ -88,7 +92,7 @@ export default function CartPage({onHandleCart, cartData}){
       </CardList>
       <Footer>
 
-        <TotalCart total="$97.90"/>
+        <TotalCart total={"$"+(total/100).toFixed(2)}/>
         <Link to="/checkout" style={{textDecoration: "none"}}><Button fullWidth>Checkout</Button></Link>
 
       </Footer>

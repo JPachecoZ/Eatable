@@ -30,13 +30,13 @@ const StyledContainer = styled.div`
 export default function CardItem({data, quantity, onSetQuantity}){
 
   return (
-    <StyledCardItem>
+    <StyledCardItem key={data.id}>
       <StyledImage src={data.picture_url}/>
-      <StyledContainer>
+      <StyledContainer >
         <Text cartList bold >{data.name}</Text>
         <Text cartList bold size="m" color="var(--accent-color)">$ {(data.price/100 * quantity).toFixed(2)}</Text>
       </StyledContainer>
-      <Counter key={data.id} id={data.id} quantity={quantity} onSetQuantity={onSetQuantity}/>
+      <Counter id={data.id} quantity={quantity} onSetQuantity={onSetQuantity}/>
     </StyledCardItem>
   )
 }
